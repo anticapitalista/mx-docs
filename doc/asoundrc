@@ -1,0 +1,12 @@
+#replace the number in the phrase "card 1" with the number of the soundcard you wish to use
+#make sure to replace both instances
+   pcm.!default {
+           type hw
+           card 1
+        }
+
+        ctl.!default {
+           type hw           
+           card 1
+        }
+

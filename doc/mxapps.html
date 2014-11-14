@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 MX Applications</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: MX Applications</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+
+<h3>Index</h3>
+<ul><li><a href="mxapps.html#notify" >MX Apt-notifier</a></li>
+<li><a href="mxapps.html#bootrepair" >MX Boot Repair</a></li>
+<li><a href="mxapps.html#check" >MX Check Apt GPG</a></li>
+<li><a href="mxapps.html#codecs">MX Codecs Installer</li> 
+<li><a href="mxapps.html#findshares">MX Find Shares</li> 
+<li><a href="mxapps.html#flash" >MX Flash Manager</a></li>
+<li><a href="mxapps.html#packageinstaller" >MX Package Installer</a></li>
+<li><a href="mxapps.html#switch" >MX Switch User</a></li>
+<li><a href="mxapps.html#user" >MX User Manager</a></li></ul>
+
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>This page provides help and information about applications developed specifically for MX Linux to save the user effort with important repetitious tasks often involving unintuitive steps. Check out also <a href="http://www.mepiscommunity.org/videos/mx-apps">this great video</a> on MX Apps!</p>
+
+<div class="blue"><h2 id="notify">MX Apt-notifier</h2></div>
+<p>This extremely handy and versatile applet monitors package updates and notifies you when they are available with a green arrow above the yellow box.  When the arrow appears, there two ways to proceed. NOTE: we follow here the <b>default</b> setup <u>when upgrades are available</u>, but the actions triggered by left- or right-clicking the mouse can be reversed in Preferences. </p>
+<ul><li><u>Right click</u> the MX Apt-notifier icon > View and Upgrade packages. This is the faster method because there is no wait for software to load, run, etc.  A terminal window appears with the packages to upgrade; examine them carefully,then click OK to complete the process.</li>
+<li><u>Left click</u> the icon to open <a href="synaptic.html#upgrading">Synaptic</a></li>
+</ul>
+<p>Options via RC:</p>
+<ul><li>Hide until updates available.  To unhide, click Start menu > Accessories > MX Apt-notifier</li>
+<li>Read MX Apt Notifier Help (this document). </li>
+<li>Select Synaptic Help.  That document is out-of-date, but still very helpful.</li>
+<li>Reverse default Select Apt Notifier Help documentation so that a <u>left</u> click brings you to View and Upgrade packages, while the right click opens Synaptic.</li>
+<li>Other available options: 
+<ul><li>change to dist-upgrade (which in addition to performing the function of upgrade, also intelligently handles changing dependencies with new versions of packages)</li>
+<li>answer "yes" to all questions, usually restricted to asking "Do you want to continue" after packages and space needs have been listed</li>
+<li>close terminal automatically when process is completed.</li></ul>
+</li></li></ul></ul>
+<p>Help for Synaptic is available from the context menu.</p>
+<p>License: <a href="mx-notifier-license.html">here</a></p>
+
+<div class="blue"><h2 id="bootrepair">MX Boot repair</h2></div>
+<p>This little application offers you options to fix a system where the boot has become non-functional--for instance, after a directory has been moved or deleted.
+<ul><li>GRUB</li>
+<ul><li><b>Reinstall</b> a new bootloader.</li>
+<li><b>Repair</b> the bootloader by regenerating the GRUB configuration file (grub.cfg).</li></ul>
+<li><a href="https://en.wikipedia.org/wiki/Boot_sector">Boot block</a>  <b><font color="#FF0000">WARNING</b>: for legacy<sup><b>*</b></sup> boot system only!</font></li>
+<ul><li><b>Backup</b> the boot block, either master (MBR) or partition (PBR).</li>
+<li><b>Restore</b> a boot block previously backed up.</li></ul></ul>
+<p><sup><b>*</b></sup>The term <q>legacy boot</q> refers to a boot system that relies on the <a href="http://en.wikipedia.org/wiki/BIOS_(PC)">BIOS</a> rather than <a href="https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface">UEFI</a>.</p>
+<p>License: <a href="mx-bootrepair-license.html">here</a></p>
+
+<div class="blue"><h2 id="check">MX Check Apt GPG</h2></div>
+<p>Apt (Apt-get) includes package authentication in order to improve security. You can still install non-authenticated packages, but you will run into an error: <q>The following signatures couldn't be verified because the public key is not available</q>.  This helpful utility saves carrying out the many steps necessary to obtain that key.</p>
+<ul><li>When you see such a public key error message, click Start menu > System > MX Check Apt GPG</li><li>Enter root's password and click Return</li><li>If the program finds a key missing, it will ask you whether you want to install it.<li>Enter <q>Y</q> and it will search online sources and install the key.</li><li>Click any key to exit</li></ul>
+
+<p>License: <a href="mx-check-license.html">here</a></p>
+
+<div class="blue"><h2 id="codecs">MX Codecs Installer</h2></div>
+
+<p>This application allows easy installation of certain restricted codecs while transferring the responsibility to the user. A codec is a piece of software that enables encoding/decoding a digital data stream or signal.  Most codecs will be installed in MX-14 by multimedia applications such as VLC.  There are two codecs, however, whose use is restricted in some jurisdictions.  As a result, the end-user must assume responsibility for downloading and installing them</p>
+<ul><li><b>libdvdcss2</b>.  Most commercial DVDs are encrypted with CSS (the Content Scramble System), which attempts to restrict the software that can play a DVD. This is a simple library designed for accessing DVDs without having to bother about decryption.  Because of the vague threat of prosecution (which has so far never happened), many distros remain hesitant to provide it by default. </li>
+<li><b>w32codecs</b>.  These are Win32 executable packages that are required for the  decompression of video formats that have no open source alternative.  Because actual code from Windows is included, the legality of the Linux package that surrounds them can be considered questionable for some regions such as the United States.</li></ul>
+<p>License: <a href="mx-codecs-license.html">here</a></p>
+
+<div class="blue"><h2 id="findshares">MX Find Shares</h2></div>
+<p>This simple but handy utility shows all <a href="https://en.wikipedia.org/wiki/Shared_resource">shares</a>, i.e., computer resources available to a user's machine. When launched, the app displays a table with machines and shares listed by networked group, both local and remote. It is particularly useful when trying to set up <a href="http://www.mepiscommunity.org/doc_mx/samba.html"> Samba</a> or <a href="http://www.mepis.org/docs/en/index.php?title=NFS" > NFS</a>.</p>
+<p>License: <a href="mx-findshares-license.html">here</a></p>
+
+<div class="blue"><h2 id="flash">MX Flash Manager</h2></div>
+<p>This application facilitates the installation, removal and especially the updating of Adobe's Flash Player. This Player is proprietary software distributed by Adobe without charge.  It permits the viewing and streaming of multimedia content, and is familiar to users in the form of online videos, games and animations. You can adjust its behavior by clicking Start menu > Settings > Adobe Flash Player.</p>
+<p>For all of its popularity, the Adobe Flash Player raises concerns for Linux users.</p>
+<ul><li><b>Integrity</b>. Some Linux users object to the presence of any non-free software <q>blobs</q> that can be seen to be in conflict with the <a href="https://www.gnu.org/distros/free-system-distribution-guidelines.html" >GNU Guidelines for Free System Distributions</a>. Others maintain that these blobs provide a desired functionality to many users who don't really care how free their system is.</li>
+<li><b>Privacy</b>. The Flash Player stores user data, as many applications do, about user habits, preferences, sites, etc. This causes some users to be concerned about the possibility that a profile of their activities could be created and used for unwanted purposes.</li>
+<li><b>Security</b>. The Player's access to the webcam and microphone create the potential for spying. Adobe updates the Player as new vulnerabilities are discovered, so that the careful user will want to always have the latest version installed.</li></ul>
+<p>The MX Flash Manager is designed to make it as easy as possible for the user to manage these concerns. It can be scheduled with a single click to automatically update to the latest Flash version.  Older processors that require a different version because they do not implement the current instruction set (<a href="https://en.wikipedia.org/wiki/SSE2">sse2</a>) will be detected and provided with the latest correct version. Note that you can adjust the Flash settings to your level of security by clicking Start menu > Settings > Adobe Flash Player.</p>
+<p>NOTE: MX Flash Manager displays the Pepper Flash Player version for information purposes only, and will neither update nor remove it. The Player comes with Google Chrome or is provided by the <b>pepperflashplugin-nonfree</b> package for Chromium. It takes precedence in Chrome/Chromium over the Adobe Flash Player if both Flash plugins are installed on your system.</p>
+
+<p>License: <a href="mx-flash-license.html">here</a></p>
+
+<div class="blue"><h2 id="packageinstaller">MX Package Installer</h2></div>
+<p>With this application you can install popular packages in a simplified manner. This ability is particularly useful for MX-14, since the CD-size limit imposed on the OS restricts the number of applications that can be provided by default. It is also very handy for installing language packs, which can be troublesome to chase down with other methods. See also <a href="http://www.mepiscommunity.org/videos/metapackage-installer" >the video</a> on this (under its previous name <q>metapackge-installer</q>).</p>
+<p>Operation is straightforward.</p>
+<ul><li>Click Start menu > System > MX Package installer and provide the root password.</li>
+<li>Expand the categories with the little arrow to see the packages available, check those that you want, and click Install.</li>
+<li>The terminal output will be displayed as first the repos are updated and then your packages are installed.</li>
+<li>Note that this is not a real terminal, so you will be unable to stop or alter the process.</li>
+</ul>
+<p>If you would like to suggest changes in the package list, please post on the <a href="http://forum.mepiscommunity.org/viewforum.php?f=91">MX Forum</a>.</p>
+<p>License: <a href="mx-packageinstaller-license.html">here</a></p>
+
+<div class="blue"><h2 id="switch">MX Switch User</h2></div>
+
+<p>This tiny but handy tool allows a user to switch out of the current session into a session of another user, without needing to log out and then back in. Sessions can be switched back and forth using <b>Ctrl-Alt-F7</b> for the original user, and <b>Ctrl-Alt-F8</b> for the second user.</p> 
+
+<p>The tool can be run conveniently by clicking on the users icon at the top of the Start menu; if not present, RC the Menu icon > Properties > Behavior tab, check the Switch Users box and enter the command <code>mx-switchuser</code>.</p>
+
+<p>License: <a href="mx-switchuser-license.html">here</a></p>
+
+<div class="blue"><h2 id="user">MX User Manager</h2></div>
+
+<p>This application aids in adding, editing, removing users and groups in your system. Everything in Linux runs under a specific user, and each user&#39;s permissions govern whether and how it runs.  The superuser ("root") can create users, give them specific passwords, restrict what they can do, etc.</p>
+
+<p>Moreover, each user belongs to one or more groups. New users are automatically added to these groups: lp, dialout, cdrom, floppy, sudo, audio, dip, video, scanner, plugdev, users, fuse, lpadmin and netdev.  In addition, some applications when installed (VirtualBox, for example) will create a new usergroup, but may or may not add users to it.</p>  
+
+<p>The application has 5 tabs.</p>
+<ul><li><b>Add/Remove Users</b>: self-explanatory.</li>
+<li><b>Repair</b>: restore default configurations for selected user. </li>
+<li><b>Copy/Sync</b>: copies or symlinks one user's folder to another's. If you are using a browser other than Iceweasel or QupZilla (default for MX-14.1), you will need to copy by hand the hidden folder in your Home (e.g., <code>.opera</code>)</li>
+<li><b>Add/Remove Groups</b>: self-explanatory.</li>
+<li><b>Group Membership</b>: allows root to limit a given user&#39;s access.</li>
+</ul>
+
+<p>License: <a href="mx-user-license.html">here</a></p>
+
+<div class="blue"><h2>Help</h2></div>
+<ul><li>MX Apt-notifier: <a href="https://wiki.debian.org/Apt" >Debian Wiki: Apt</a></li>
+<li>MX Boot Repair: <a href="https://en.wikipedia.org/wiki/Linux_startup_process" >Wikipedia: Linux startup Process</a> </li>
+<li>MX Check Apt GPG: <a href="http://www.gnupg.org/" >GNU Privacy Guard</a></li>
+<li>MX Codecs Installer: <a href="http://en.wikipedia.org/wiki/List_of_open-source_codecs" >Wikipedia: open-source codecs</a></li> 
+<li>MX Flash Manager: <a href="hhttps://en.wikipedia.org/wiki/Adobe_Flash_Player" >Wikipedia: Adobe Flash Player</a></li>
+<li>MX User Manager: <a href="http://www.unix.com/man-page/Linux/8/adduser/" >the adduser man page</a> </li></ul>
+
+
+<div class="footer">Version: 1.4<br />
+Last updated 2014-10-30</div>
+</body>
+</html>

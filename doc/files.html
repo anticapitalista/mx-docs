@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Files</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Files</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>File management in MX-14 is carried out through Thunar, a fast and powerful tool.  Much of its basic use is self-evident, but here are good things to know:</p>
+<ul><li>Hidden files are out of sight by default, but can be made visible via the menu" (View > Show Hidden Files) or by pressing Ctrl-H</li>
+<li>The Side Pane can be hidden, and directory (folder) shortcuts can be placed there by RC > Send To</li><li>The context menu has been populated with common actions that vary by what is present or under focus.</li><li>Root action is available via the context menu to open a terminal, edit as root, or open an instance of Thunar with root privileges.</li><li>Thunar easily handles FTP transfers, see below.</a></li></ul>
+
+
+<div class="blue"><h2>Tips and Tricks</h2></div>
+<ul><li>When working in a directory that requires superuser privileges, you can RC > Open root Thunar here.</li>
+<li>You can set up tabs with File > New Tab (or Ctrl-T), then move items from one location to another by dragging them to a tab and releasing it.</li>
+<li>Actions listed in the context menu can be edited/deleted, and new ones added, by clicking Edit > Configure custom actions... </li>
+<li>Various options and hidden commands are also visible, see Help below.</li>
+<li>Compressed files can be managed by RC on the file.  The archiver working in the background is file-roller (Start menu > Accessories > Archive Manager). </li>
+<li>To find files, RC in a blank space > Find files here.  A dialog box will pop up to give you options. Running in the background is catfish (Start menu > Accessories > Catfish).</li>
+<li>To set up a soft link (AKA symlink), RC the target (file or folder you want the link to point to) > Create symlink. Then RC the new symlink, cut it and paste it to where you want it.</li>
+<li>To enable image thumbnails, see <a href="http://www.mepiscommunity.org/videos/thumbnail-images-thunar">this helpful video</a>.</li>
+</ul>
+
+<div class="blue"><h2 id="ftp">FTP</h2></div>
+<p>The File Sharing Protocol (FTP) is used to transfer files from one host to another host over a network.</p>
+<ul><li>Open Thunar and click on the Browse Network icon in the left pane</li>
+<li>In the address field, type <code>ftp://NameOrAddressoOfServer</code>, for example mepiscommunity.org</li><li>Up pops an authorization dialog box, fill in username and pwd and let it save password if you are comfortable with that</li><li>That's it.  Once you have navigated to the folder you are always going to use, you can RC the folder > Send to > Side Pane to create a very simple way to connect.</li></ul>
+<p>For a discussion of how FTP works, see <a href="http://www.ncftp.com/libncftp/doc/ftp_overview.html">this page</a>.</p>
+
+<div class="blue"><h2 id="shares">Connecting to Shares</h2></div>
+<p>Thunar can connect to shared folders (AKA Samba Shares) on Windows, Mac, Linux computers and NAS (Network Attached Storage) devices if Samba is installed.  </p>
+<ul>
+<li>Select Browse Network in the left pane to show various networks, including Windows Network</li>
+<li>Click the Network you want to see available Workgroups (often called WORKGROUP by default). Now drill down to find what you are looking for.</li>
+<ul>
+<li>Select a Workgroup for available Samba Servers
+<li>Select a Server for available Samba Shares
+<li>Select a Samba Share to see all the available folders</li> 
+<li>A shortcut for the selected Share will be created in the Network sidebar section 
+</ul></ul><p>For other actions with Samba, see <a href="samba.html" >this document</a>.</p>
+
+<div class="blue"><h2>Help</h2></div>
+<p>For a detailed discussion of Thunar and its use, consult <a href="http://docs.xfce.org/xfce/thunar/start" >Xfce Docs: Thunar</a></p>
+
+<div class="footer">Version: 0.4<br />
+Last updated 2014-06-28</div>
+</body>
+</html>

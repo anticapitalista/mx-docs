@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Synaptic</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Synaptic</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<h3>Index</h3>
+<ul><li><a href="synaptic.html#installing" >Installing and Removing</a></li>
+<li><a href="synaptic.html#upgrading" >Upgrading and Downgrading</a></li>
+<li><a href="synaptic.html#trouble">Troubleshooting</li>  
+<li><a href="synaptic.html#repos">Repositories</li> 
+<li><a href="synaptic.html#tips" >Tips and tricks</a></li>
+</ul>
+
+<div class="blue"><h2>Introduction</h2></div>
+
+<p>Synaptic is a friendly, easy-to-use frontend (GUI) to the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool"> APT</a> packaging system.  It is a graphical tool that allows you to install, remove, upgrade, downgrade, or get information on all the software packages available in the online repositories on your repository list.  Note that your root password is required and, naturally, you will need to be connected to the Internet if you want to use the online repositories (as opposed to the DVD).</p>
+
+<div class="blue"><h2 id="installing">Installing and removing packages</h2></div>
+<h3>Installing</h3>
+<p>Here are the basic steps for installing software in Synaptic:</p> 
+
+<ul>
+<li>Click Start menu > System > Synaptic Package Manager, supplying the root password if necessary.
+</li>
+<li>Hit the <strong>Reload</strong> button.  This button causes Synaptic to contact the online repository servers and download a new
+<em>index</em> file with information on what packages are available, what versions they are, and what other packages are required for them
+to be installed.  If you get a message that some of the repositories failed to be contacted, wait a minute and then try again.
+</li>
+<li>If you already know the name of the package you are looking for, just click in the pane on the right and start typing, and Synaptic will incrementally search for what you type. 
+</li> 
+<li>If you don't know the package's name, use the <strong>Search</strong> box in the upper right corner to locate software based on name or keywords.  This is one of Synaptic's greatest advantages over other methods.
+</li>
+<li>Alternatively, use one of the filter buttons in the bottom left corner:</li>
+<ul><li><u>Sections</u>  provides subareas such as Editors, Games and Amusement, Utilities, etc.).  You will see a description of each package in the bottom pane, and can use the tabs to discover more information about it.</li>
+<li><u>Status</u> groups packages by their installation situation. </li>
+<li><u>Origin</u> will show packages from a specific repository.</li> 
+<li><u>Custom Filters</u> provides various filter options</li> 
+<li><u>Search Results</u> will show a list of previous searches for the Synaptic session you are in.</li>
+</ul>
+<li>Click the empty box next to the package you want and select <strong>Mark for Installation</strong>.  If the package has dependencies, you will be notified and they will automatically be marked for installation as well.  You can also just double-click the package if it is the only one you are installing.
+</li>
+<li>RC the package name again, and check carefully the packages listed under Mark Recommended for Installation; Mark Suggested for Installation is worth looking at as well.</li>
+<li>Click <strong>Apply</strong> to begin the installation.  You may see a warning message &#8220;You are about to install software that can't be authenticated!&#8221; that you can safely ignore.
+</li>  
+<li>There may be additional steps: just follow the prompts as you receive them until the installation completes.
+</li>
+</ul>
+
+<h3>Removing</h3>
+<p>Removing software from your system with Synaptic seems as straightforward as installing, but there is more to it than meets the eye:</p> 
+ 
+<ul>
+<li>To remove a package, simply right-click it and select <strong>Mark for Removal</strong> or <strong>Mark for Complete Removal</strong>.
+
+<ul> <!-- sublist -->
+<li><strong>Removal</strong> uninstalls the software, but leaves configuration files in case you want to keep your settings.
+</li>  
+<li><strong>Complete Removal</strong> removes the software and the configuration files as well (this is known as <em>purging</em> a package).
+</li>
+</ul></li> <!-- end sublist -->
+
+<li>When you have other programs that depend on the package being removed, those packages will have to be removed as well.   This usually happens when you remove software libraries (packages starting with &ldquo;lib&rdquo;), services, or command-line applications that serve as  back-ends to other
+applications.  <em>Make sure you read carefully</em> the summary Synaptic gives you before clicking <strong>OK</strong>.
+</li>
+<li>Removing large applications that are composed of many packages can bring complications.   Many times these packages are installed using
+a <strong>meta-package</strong>, which is an empty package that simply depends on all the packages you need for the application.  The best way to
+remove a complicated package like this is to inspect the dependency list for the meta-package, and remove the packages listed there.  Take
+care, however, that you don't uninstall a dependency of another application you want to keep!
+</li>
+<li>You may find that the staus category Autoremoveable begins to accumulate packages.  These were installed by other packages and are no longer needed, so you can click on that status category, highlight all the packages in the right pane, and then right-click them to remove.</li>
+</ul>
+
+<div class="blue"><h2 id="upgrading">Upgrading and downgrading</h2></div>
+<p>Synaptic enables you to quickly and conveniently keep your system up-to-date.</p>  
+<h3>Upgrading</h3>
+<p>Unless you are using a manual method in a terminal, upgrading is typically triggered by the appearance of a green arrow on the Apt-notifier in the Notification Area.  There are two ways to proceed when this arrow appears.</p>
+<ul><li><u>Right click</u> the Apt-notifier icon > Upgrade all packages. This the faster method because there is no wait for software to load, run, etc.  Examine the packages that are available for upgrade,then hit Return to complete the process.</li>
+<li><u>Left click</u> the icon to open Synaptic</li>
+<ul>
+<li>Click the <strong>Mark All Upgrades</strong> icon below the menu bar to select all available packages for upgrade, or click on the Installed (upgradable) link in the left panel to review the packages or to select upgrades individually. 
+</li> 
+<li>Click <strong>Apply</strong> to begin the upgrade, ignoring the warning message.  As the installation process begins, you have the option of watching the details in a terminal within Synaptic.
+</li>
+<li>With some package upgrades, you may be asked to confirm a dialog, enter configuration information, or decide whether or not to
+overwrite a configuration file you have altered.  Pay attention here, and follow the prompts until the upgrade completes.
+</li>
+</ul></ul>
+<h3>Downgrading</h3>
+<p>Sometimes you may want to downgrade an application to an older version, for instance because of problems that arose with the new one.  This is easy to do in Synaptic:</p>
+<ol>
+<li>Open Synaptic, supply the root password, and click Reload.</li>
+<li>Click on Installed in the panel on the left, then find and highlight the package you want to downgrade in the panel on the right</li>
+<li>On the menu bar, click <strong>Package > Force version...</strong></li>
+<li>Select from the available versions on the pull-down list</li>
+<li>Click Force Version, then install in the usual manner.</li>
+</ol>
+
+<h3>Pinning</h3>
+<p>Sometimes you may want to <em>pin</em> an application to a specific version to keep it from being upgraded in order to avoid problems with more recent ones.  This is easy to do:</p>
+
+<ol>
+<li>Open Synaptic, supply the root password, and click Reload.
+</li>
+<li>Click on Installed in the panel on the left, then find and highlight the package you want to pin in the panel on the right.
+</li>
+<li>On the menu bar, click <strong>Package > Lock version...</strong>
+</li>
+<li>Synaptic will highlight the package in red and add a lock icon to the first column.
+</li>
+<li>To unlock, highlight the package again and click Package > Lock version (which will have a check mark).
+</li>
+</ol>
+
+<p>NOTE: this pinning only affects the application Synaptic, not the actual list of application versions used by Apt, and will not work if you later use another upgrade means.  For a universal pinning method, follow the example linked below.</p>
+
+<div class="blue"><h2 id="trouble">Troubleshooting</h2></div>
+<p>Synaptic is very reliable, but sometimes you may get an error message. A full discussion of such messages may be found in the source given in the Links section, so here we will only mention a couple of the most common.</p>
+<ul>
+<li>It may happen with a new repository that you see an error message after reloading that says something like: <q>W: GPG error: [some repository URL] Release: The following signatures couldn't be verified </q>. This message appears because apt-get includes package authentication in order to improve security, and the key is not present. To fix this, click Start menu > System > MX Check Apt GPG and follow the prompts. </li>
+<li>Occasionally, packages will fail to install because their install scripts fail one or more <em>safety
+checks;</em> for instance, a package might try to overwrite a file that is part of another package, or require downgrading another package
+due to dependencies.  If you have an install or upgrade that is stuck on one of these errors, it is called a <em>broken package</em>.  To fix this, click on the <strong>Broken packages</strong> entry in the left panel.  Highlight the package and try first to fix the problem by clicking <strong>Edit >Fix Broken Packages</strong>.  If that is not successful, then right-click the package to uninstall it.
+</li>
+</ul>
+
+<div class="blue"><h2 id="repos">Repositories</h2></div>
+<p>MX Linux manages software through the Debian package management system. The software is stored on different servers called "repositories" (repos). New users will typically want to leave those alone, but there are some important facts and features for consideration by more experienced users.</p>
+<ul><li>Manage repositories by clicking Settings &gt; Preferences &gt; Repositories. The repos visible in this dialog box are being read from <b>/etc/apt/sources.list.d</b> 
+<li>The list of default repos for the <i>current</i> release can be found in <a href="advanced_repos.html" >MX Repositories</a>. Some applications (Google Earth, for example) may create their own list.</li>
+<li>Some repos are listed but not enabled by default; these include Debian servers for popular applications (VirtualBox, Opera, etc.) and servers with particular collections of packages.
+<li>The Debian unofficial repo for <a href="http://www.deb-multimedia.org/">Multimedia</a> is disabled by default; this is because it is both unnecessary for MX-14 and potentially conflicts with default MX packages. Enable this repo <i>with caution</i> if you are looking for a particular package, but otherwise the recommendation is to <b>leave it disabled</b>.</li>
+<li>Of special importance are the two Mepis Community test repos for <a href="http://main.mepis-deb.org/mepiscr/testrepo/">Mepis 12 beta 2</a> and <a href="http://main.mepis-deb.org/mepiscr/mx-test/">MX-14</a>. These are not enabled by default, since they contain new packages whose function and stability are being tested before moving up to the main Mepis repos. The recommendation is to <b>only enable them to install/upgrade particular packages</b>, disabling them subsequently.</li>
+<li>There are other unofficial Debian repos (some listed <a href="https://wiki.debian.org/UnofficialRepositories">here</a>) that could be included by using the Add button and filling in the information.</li>
+<ul><li> Be cautious about adding unofficial repos without a good understanding of compatibility with existing MX-14 repos.</li>
+<li>Note that repos are typically listed on a single line with small spaces between elements that are sometimes difficult to see. There are 4 elements for instance in this example:<br /> 
+&nbsp; &nbsp; &nbsp;<b>Example</b>: <code>deb http://qgis.org/debian wheezy main</code><br />
+Each element goes into its own box in the Add dialog box.</li>
+</ul>
+</ul>
+
+<div class="blue"><h2 id="tips">Tips and tricks</h2></div>
+<p>There are a number of Synaptic features that are not obvious. </p>
+<ul><li>Edit &gt; Add CD-ROM: lets you use a local CD/DVD as a source.</li>
+<li>RC any package and select Properties for details, screenshot, etc.</li>
+<li>Settings &gt; Preferences &gt; Distribution: set to Highest by default, allows you to change which package source will take priority.</li>
+</ul>
+
+<div class="blue"><h2 id="s07-2_links">Help</h2></div>
+<ul>
+<li>Common Synaptic errors: <a href = "http://www.mepis.org/docs/en/index.php?title=Public_key_not_available_error">Mepis Wiki: Synaptic errors</a></li>
+<li><a href = "http://www.nongnu.org/synaptic/">Synaptic home page</a></li>
+<li>How to use: <a href ="https://help.ubuntu.com/community/SynapticHowto">
+Ubuntu Wiki: Synaptic</a></li>
+<li>Synaptic manual (2004): <a href="http://mepiscommunity.org/synaptic/index.html">online</a></li>
+</ul>
+
+<div class="footer">Version: 0.9, some material first written for the Mepis 11 User Manual<br />
+Last updated 2014-10-30</div>
+</body>
+</html>
+
+</div>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Advanced: Bootloader repair</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Advanced: Bootloader repair</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2 id="repair">Introduction</h2></div>
+<p>The bootloader is the first software program to run and is responsible for loading and transferring control to the kernel. It sometimes happens that the bootloader on an installation (<a href="https://en.wikipedia.org/wiki/GNU_GRUB">GRUB2</a>) becomes dysfunctional, usually because the user has made changes of some kind.  </p>
+
+<div class="blue"><h2 id="repair">Repair</h2></div>
+<p>When that happens, GRUB2 can be restored to a functional state, depending on the exact problem.</p>
+<ul><li>You can boot into at least one partition.</li>
+<ul><li>Boot into the good partition</li>
+<li>Open a terminal and become root</li>
+<li>Enter the command <code>update-grub</code> and press return.</li>The program will probe for drives and partitions, then exit.  Examine the screen to see what has been found
+<li>Reboot to enter the partition of your choice.</li>
+</ul>
+<li>You are unable to boot into any partition</li> 
+<ul><li>Boot to the Live medium.</li><li>Click Start Menu > System > MX Boot Repair, providing root's password ("root")</li><li>Consult <a href="mxapps.html#bootrepair">this document</a> for help on using this utility.</li><li>When you reboot without the Live device, the GRUB screen should look and function normally.</li></ul></ul> 
+
+<div class="footer">Version: 0.3<br />
+Last updated 2014-03-16</div>
+</body>
+</html>

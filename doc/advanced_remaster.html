@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Advanced: Remaster</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Advanced: Remaster</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="sect1">
+<div class="blue"><h2 id="details_for_developers">Details for Developers</h2></div>
+<div class="sectionbody">
+
+
+
+<h3>How it Works</h3>
+
+<div class="paragraph"><p>In order to perform a live remaster, you just need to create the new linuxfs
+file in the same directory as the existing linuxfs file with the ".new"
+extension added.  On the next boot, before the linuxfs file is mounted, the
+following commands are (in essence) performed in the directory containing
+the linuxfs file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># mv linuxfs linuxfs.old
+# mv linuxfs.new linuxfs</code></pre>
+</div></div>
+<div class="paragraph"><p>If the new linuxfs file makes the system unbootable then the <span class="cheat">rollback</span>
+boot code should be used.  It can either be added manually by the user or
+there can be another Grub menu entry that contains the <span class="cheat">rollback</span> option.
+In this case the following two commands are (in essence) performed in the
+directory containing the linuxfs file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># mv linuxfs linuxfs.bad
+# mv linuxfs.old linuxfs</code></pre>
+</div></div>
+<div class="paragraph"><p>This reverses the previous actions except the file that was originally called
+<code>linuxfs.new</code> is now called <code>linuxfs.bad</code>.  If you use the <span class="cheat">sqname</span> or
+<span class="cheat">sqext</span> options to change the name of the linuxfs file then these names
+are used instead of <code>linuxfs</code>.  For example if you boot with <span class="cheat">sqext=e16</span>
+then we look for a file called <code>linuxfs.e16.new</code> etc.</p></div>
+
+<div class="paragraph"><p>At its core, live remastering can be done with a single, simple command:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># mklinuxfs /aufs linuxfs.new -e tmp var/tmp var/log</code></pre>
+</div></div>
+<div class="paragraph"><p>Almost all of the work is in the details of using the right linuxfs file in
+the right directory on the right device, making sure that device is mounted
+and is writable, and finally, making sure there is enough free space on the
+device to create the new linuxfs files.</p></div>
+
+<h3 id="_the_devil_8217_s_in_the_details">The Devil&#8217;s in the Details</h3>
+
+<div class="paragraph"><p>To make writing live remaster programs as easy as possible, the linuxrc
+script generates a <code>remaster.conf</code> file in the <code>/live-config</code> directory
+whenever remastering is possible.  This usually means that the boot device
+is writable and we didn&#8217;t boot <span class="cheat">fromiso</span>.  In addition, this file
+contains all the details you need to do a live remaster.  Here is an example:</p></div>
+<div class="listingblock">
+<div class="title">Example <code>/live-config/remaster.conf</code> file</div>
+<div class="content">
+<pre><code>BOOT_MP="/boot-dev"
+BOOT_DEV="/dev/sdb2"
+SQFILE_DIR="/boot-dev/MX-14-12"
+SQFILE_FULL="/boot-dev/MX-14-12/linuxfs"
+SQFILE_NAME="linuxfs"
+
+AUFS_MP="/aufs"
+AUFS_RAM_MP="/aufs-ram"
+
+DID_REMASTER=""
+DID_ROLLBACK=""</code></pre>
+</div></div>
+<div class="paragraph"><p>Here is a bare-bones shell script to do remastering.  It is
+not intended to be used (although it should work), it is meant
+as a simple example to demonstrate the required steps, namely:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+read config file or exit if file does not exit
+</p>
+</li>
+<li>
+<p>
+mount the boot device unless it is already mounted
+</p>
+</li>
+<li>
+<p>
+remount it read-write if it is not already
+</p>
+</li>
+<li>
+<p>
+create the new linuxfs file
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>In practice, more error checking should be performed, more
+verbose output should be available and devices that were
+mounted should be unmounted, etc.  Programs should probably
+ask if the user wants to reboot after the new linuxfs file
+was created.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>#!/bin/bash
+
+conf_file=/live-config/remaster.conf
+
+#--- Read variables from conf_file
+[-f $conf_file ] || exit
+source $conf_file
+
+#--- Mount device holding linuxfs if needed
+mountpoint -q $BOOT_MP || mount $BOOT_DEV $BOOT_MP
+
+#--- remount read-write if needed
+mnt_opts=$(grep "^$BOOT_DEV " /proc/mounts | cut -d" " -f4)
+case ",$mnt_opts," in
+    ,rw,) ;;
+       *) mount -o remount,rw $BOOT_MP;;
+esac
+
+#--- create the new linuxfs file
+mklinuxfs $AUFS_MP $SQFILE_FULL.new -e tmp var/tmp var/log</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+
+
+<div class="blue"><h2 id="_rolling_back_and_version_management">Rolling Back and Version Management</h2></div>
+
+<div class="paragraph"><p>The linuxrc script offers crude emergency rollback option but that doesn&#8217;t
+mean the remastering script can&#8217;t do rollbacks as well.  It&#8217;s best to think
+of the remaster script as being in control and the linuxrc script offering
+a service: to replace the <code>linuxfs</code> file with <code>linuxfs.new</code>.  If the linuxrc
+script has just performed a remaster or a rollback, this will be reported in
+the  <code>/live-config/remaster.conf</code> file.  But that is not 100% reliable since
+it is possible that another reboot has occurred before the remaster script has
+been run.  What is reliable (or at least much more reliable) is the existence
+of the files: <code>linuxfs.old</code> or <code>linuxfs.bad</code>.</p></div>
+<div class="paragraph"><p>Generally, a full-featured live-remaster program will use the existence of one
+of these files as an indication of either a successful remaster or a rollback.
+The script should then "do something" with these files so that it does not
+keep thinking a remaster or rollback just occurred.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_symlinks_can_help">Symlinks can Help</h3>
+
+<div class="paragraph"><p>If a user performs several remasters with or without rollbacks, it will be
+very easy to lose track of which version is which.  An easy way around this
+problem is to use symlinks for all the linuxfs files, possibly including
+the first.  When creating a new LiveUSB, you can name the linuxfs file
+<code>linuxfs.00</code> and create a <code>linuxfs</code> symlink that points to it:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>    linuxfs --&gt; linuxfs.00</code></pre>
+</div></div>
+<div class="paragraph"><p>When it is time to do the first remaster, the new linuxfs file can be
+called <code>linuxfs.01</code> with a symlink pointing to it called <code>linuxfs.new</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>   linuxfs.new --&gt; linuxfs.01</code></pre>
+</div></div>
+<div class="paragraph"><p>You can easily tell which version of linuxfs is being used by looking at
+the extension of the file the <code>linuxfs</code> symlink points to.  For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$  basename $(readlink -f $SQFILE_FULL) | sed 's/.*\.\([0-9]\+\)$/\1/'</code></pre>
+</div></div>
+</div>
+
+<div class="blue"><h2 id="_estimating_the_size_of_a_new_linuxfs_file">Estimating the Size of a New Linuxfs File</h2></div>
+
+<div class="paragraph"><p>Since making a new linuxfs file can consume time and resources it is
+important to not start the process when we know there is not enough room on
+the device to complete it. In other words, we need to estimate how much the
+file system will get compressed.  If past performance is indicative of future
+results then we can look at the compression ratios for the linuxfs files
+distribution in the standard ISO files:</p></div>
+
+<div class="paragraph"><p>Looking over various versions, the ratios are all within 10% of 0.41.  I&#8217;d suggest using a safety margin
+of 10 Meg + 10% but even this might not suffice if, for example, a lot of
+compressed media files or large amounts of pseudo-random data are stored.
+For those cases the compression ratio will be close to 1.0 and might even
+exceed 1.0 due to overhead.</p></div>
+<div class="paragraph"><p>You can get an accurate measure of home much space the uncompressed file system
+takes up with the <code>du</code> command applied to the AUFS mount point:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># du -sm /aufs | cut -f1
+892</code></pre>
+</div></div>
+<div class="paragraph"><p>This says the file system takes up 892 Meg.  The estimate for the linuxfs
+file would be 892 * .45 + 10 = 407 Meg.</p></div>
+<div class="paragraph"><p>It should be much faster to just look at the size of what is used in the RAM
+part of the AUFS and then add this to the size of the existing linuxfs file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># du -sm /aufs-ram | cut -f1
+23
+# du -sm /boot-dev/MX-14-12/linuxfs | cut -f1
+354</code></pre>
+</div></div>
+<div class="paragraph"><p>This is faster and it is also provides a more conservative estimate.  For
+example, if the user has deleted a bunch of packages then the size of the
+new linuxfs file will be smaller than the size of the original but this
+estimate will always say the new linuxfs file will be larger than the
+original.</p></div>
+<div class="paragraph"><p>In the example above the RAM part of the AUFS file system takes up 23 Meg and
+the original linuxfs file takes 354 Meg.  The estimate for the size of the
+new linuxfs file is 354 + 23 * .45 + 10 = 374.  This is smaller than the
+previous estimate because of the safety margins.  If you remove those then the
+two estimates agree with within 1%.</p></div>
+
+
+<div class="footer">Version: 0.3<br />
+Last updated 2014-03-16</div>
+</body>
+</html>

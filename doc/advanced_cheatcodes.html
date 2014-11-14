@@ -1,0 +1,455 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Cheatcodes</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Cheatcodes</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<h3>Index</h3>
+<ul>
+<li><a href="advanced_cheatcodes.html#boot" >Boot LiveCD/USB</a></li>
+<li><a href="advanced_cheatcodes.html#persistence" >Persistence</a></li>
+<li><a href="advanced_cheatcodes.html#remastering" >Remastering</a></li>
+<li><a href="advanced_cheatcodes.html#X-Windows" >X-Windows</a></li>
+<li><a href="advanced_cheatcodes.html#personalization" >Personalization</a></li>
+<li><a href="advanced_cheatcodes.html#other" >Other</a></li>
+</ul>
+<div class="blue"><h2>Introduction</h2></div>
+<p>This document explains many of the boot parameters (AKA cheatcodes) that are used by <b>antiX</b> and <b>MX-14</b> Live systems. Most users will get by just fine by making selections in the bootloader menus, which provide a convenient GUI for setting some of the options documented here. You can use the <code>F12</code> key in the bootloader to see what boot options are selected by your current menu choices.</p>
+<p>Boot codes not listed in the menus must be added manually.  When the boot screen shows, type <q>e</q> (without the quotes) to enable editing the line with the boot parameters. </p>
+
+<div class="blue"><h2 id="boot">Boot LiveCD/USB</h2></div>
+
+<p>These options control how the Live media boots. In particular the control where we look for the <span class="file"><i>linuxfs</i></span> file. The location of this file will be used for other Live features such as persistence and remastering.</p>
+
+<h3 id="The-Boot-Device">The Boot Device</h3>
+
+
+<p>The primary job of Live initrd is to find the compressed file system called a <i>squashfs</i> file. For <b><i>antiX</i></b> and MX this file is normally named <span class="file"><i>linuxfs</i></span>. We need to find the device this file is on and find the file on that device.</p>
+
+<p>Normally we scan all cdrom (and dvd) and usb devices for that file. This default behavior can be modified with the following options. The easiest way to specify the boot device is the <b>from</b> option which specifies what type of device to boot from.</p>
+
+<dl>
+
+<dt id="option.from=">from=*</dt>
+<dd>
+
+<p>The type of boot device. Valid values <b>cd hd usb</b>. More than one is allowed. The default is <b>usb,cd</b> so by default we will only look at cdrom/dvd devices and usb devices to for the boot directory.</p>
+
+</dd>
+</dl>
+
+<p>You can also specify a device more specifically but giving a device name (like <b>sda1</b>), a partition label, or a partition UUID.</p>
+
+<dl>
+
+<dt id="option.bdev=">bdev=*</dt>
+<dd>
+
+<p>The name of the boot device. For example <b>bdev=sda1</b>.</p>
+
+</dd>
+<dt id="option.blab">blab</dt>
+<dd>
+
+<p>The partition label of the boot device.</p>
+
+</dd>
+<dt id="option.buuid">buuid</dt>
+<dd>
+
+<p>The UUID of the boot device.</p>
+
+</dd>
+</dl>
+
+<h3 id="The-Boot-Directory">The Boot Directory</h3>
+
+<p>By default, we look for the <span class="file"><i>linuxfs</i></span> file and and persistence files in the <span class="file"><i>/antiX</i></span> directory on the boot device. If you want to boot more than one Live system on the same device or if you want to do a frugal install, you should change that directory and use the <b>bdir</b> parameter to point to the new directory.</p>
+
+<dl>
+
+<dt id="option.bdir=">bdir=*</dt>
+<dd>
+
+<p>The boot directory. This is the directory where we look for the <span class="file"><i>linuxfs</i></span> (squashfs) file, persistence files and live-remaster files. The default is <span class="file"><i>/antiX</i></span>.</p>
+
+</dd>
+</dl>
+
+<h3 id="Debugging">Debugging</h3>
+
+
+<p>Debugging the boot process is described in the antiX FAQs. Sometimes booting problems can be tracked down to a missing driver or a driver that is not getting loaded. These two boot parameters can be helpful in tracking down such problems.</p>
+
+<dl>
+
+<dt id="option.bp=">bp=*</dt>
+<dd>
+
+<p>Set one or more breakpoints in the live-init script separated by commas. Use <b>bp=?</b> to get a list of breakpoints to choose from.</p>
+
+<pre><code>  1)   before loading modules
+  2)   before looking for linuxfs file
+  3)   after mounting boot device
+  4)   after preparing persistence
+  5)   after mounting persistence device    
+  6)   after mounting linuxfs file
+  7)   after mounting aufs
+  8)   before prepare switch_root
+  9)   right before starting init
+ ce)   After toram copy file error
+ ch)   after init= chroot
+  e)   On possibly fatal error
+  u)   final umount
+  v)   before check VID</code></pre>
+
+</dd>
+<dt id="option.verb=">verb=*</dt>
+<dd>
+
+<p>Control how much gets printed out during the early boot process. The default level is <b>verb=5</b>. Lower numbers print less, higher numbers print more. Usually <b>6</b> or <b>7</b> will show you more info without being too obnoxious. The full output is available in the <span class="file"><i>/var/log/live/bootloader.log</i></span> file. A partial version of the log file is available at <span class="file"><i>/init.log</i></span> from within most breakpoints.</p>
+
+</dd>
+</dl>
+
+<h3 id="Loading-Modules">Loading Modules</h3>
+
+
+<p>One of the primary tasks of the live-initrd is to mount the device that holds the <span class="file"><i>linuxfs</i></span> file which contains the final file system. Modules (also called drivers) sometimes need to be loaded to allow the kernel to talk to certain types of hardware. Most of the time this is taken care of automatically but if you have very old or unusual hardware, there might be a glitch.</p>
+
+<dl>
+
+<dt id="option.load=">load=*</dt>
+<dd>
+
+<p>Load one or more specific modules, separated by commas. You need to know the name of the module or modules you need for this to be useful.</p>
+
+</dd>
+<dt id="option.load=all">load=all</dt>
+<dd>
+
+<p>Load all modules in the initrd that are not hardware specific. This is a shotgun approach just in case there is a module that is available in the initrd that needs to be manually loaded for your system to boot.</p>
+
+</dd>
+<dt id="option.noload">noload</dt>
+<dd>
+
+<p>Don&#39;t automatically load the standard list of modules.</p>
+
+</dd>
+</dl>
+
+
+<h3>Other Booting option</h3>
+
+<p>These options affect the boot process but the don&#39;t fit into any of the categories above.</p>
+
+<dl>
+
+<dt id="option.fromiso=">fromiso=*</dt>
+<dd>
+
+<p>Use this to boot from a iso file. This feature is deprecated because it defaults some of the more advanced features of the Live system but is supported due to popular (or otherwise) demand.</p>
+
+</dd>
+<dt id="option.try=">try=*</dt>
+<dd>
+
+<p>The maximum number of seconds to try finding the boot directory. The default is 15 seconds. This replaces <b>rootdelay</b> which is no longer used.</p>
+
+</dd>
+
+<div class="blue"><h2 id="persistence">Persistence</h2></div>
+
+<p>These options enable and control Live persistence which allows you to make changes that will persist across reboots. These options are normally used on LiveUSBs but if you specify a persistence device (or use the default LiveCD persistence device) then you can make use persistence on a LiveCD. In this case, the changes will have to be saved on some other device that allows for read-write access.</p>
+
+<dl>
+
+<dt id="option.persist=">persist=*</dt>
+<dd>
+
+<p>This is the main option for controlling Live persistence. It can be given one or more of the following parameters, separated by commas</p>
+
+<dl>
+
+<dt>auto,a</dt>
+<dd>
+
+<p>Automatically create <span class="file"><i>rootfs</i></span> and/or <span class="file"><i>homefs</i></span> files if they don&#39;t already exist and they are required. Normally, we will prompt the user for size and file system type.</p>
+
+</dd>
+<dt>hd</dt>
+<dd>
+
+<p>Only look on internal hard drives for the persistence device. This is analogous to <b>from=hd</b> for finding the boot device.</p>
+
+</dd>
+<dt>home!,h!</dt>
+<dd>
+
+<p>Enable and require home persistence. The exclamation point means this form of persistence is required. A non-fatal error will be thrown if it cannot be enabled.</p>
+
+</dd>
+<dt>home,h</dt>
+<dd>
+
+<p>Request home persistence but don&#39;t require it. We will try to enable home persistence but if we can&#39;t then this fact is briefly noted and the boot continues normally.</p>
+
+</dd>
+<dt>root!,r!</dt>
+<dd>
+
+<p>Enable and require root persistence. The exclamation point means this form of persistence is required. A non-fatal error will be thrown if it cannot be enabled.</p>
+
+</dd>
+<dt>root,r</dt>
+<dd>
+
+<p>Request root persistence but don&#39;t require it. We will try to enable root persistence but if we can&#39;t then this fact is briefly noted and the boot continues normally.</p>
+
+</dd>
+<dt>static,s</dt>
+<dd>
+
+<p>If root persistence is enabled then use the static version of root persistence. Normally, dynamic root persistence is used. <b><i>FIXME</i></b> explain more?</p>
+
+</dd>
+<dt>usb</dt>
+<dd>
+
+<p>Only look on usb partitions for the persistence device. This is analogous to <b>from=usb</b> for finding the boot device.</p>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+<h3 id="The-Persistence-Device">The Persistence Device</h3>
+
+
+<p>Just like the boot device can be specified generally with the <code>from=*</code> option and more specifically with options like <code>bdev=*</code>, the same choices are available for specifying the persistence device.</p>
+
+<p>On a LiveUSB or a frugal install, the default persistence device is the boot device which is what you would expect. Normally the persistence files will sit alongside the <span class="file"><i>linuxfs</i></span> file that we are booting from.</p>
+
+<p>On a LiveCD the default persistence device is whatever device has the disk label <code>antiX-Persist</code>. If you specify a persistence device with one of the three options below then the defaults are ignored.</p>
+
+<dl>
+
+<dt id="option.pdev=">pdev=*</dt>
+<dd>
+
+<p>The name of the persistence device. For example <b>pdev=sdb2</b>.</p>
+
+</dd>
+<dt id="option.plab">plab</dt>
+<dd>
+
+<p>The partition label of the persistence device.</p>
+
+</dd>
+<dt id="option.puuid">puuid</dt>
+<dd>
+
+<p>The UUID of the persistence device.</p>
+
+</dd>
+</dl>
+
+<h3 id="Other-Persistence-Options">Other Persistence Options</h3>
+
+
+<p>These options don&#39;t fit into any of the previous categories.</p>
+
+<dl>
+
+<dt id="option.ptry">ptry</dt>
+<dd>
+
+<p>How many seconds to wait for the persistence device to appear. This is only relevant if the peristence device is different from the boot device. The default is 10 seconds.</p>
+
+</dd>
+</dl>
+
+
+<div class="blue"><h2 id="remastering">Remastering</h2></div>
+
+<p>These two options affect remastering. Normally, remastering is done automatically whenever there is a <span class="file"><i>linuxfs.new</i></span> file in the same directory as the <span class="file"><i>linuxfs</i></span> file.</p>
+
+<dl>
+
+<dt id="option.noremaster">noremaster (<b><i>LiveUSB Only</i></b>)</dt>
+<dd>
+
+<p>Disable remastering even when a <span class="file"><i>linuxfs.new</i></span> file is found.</p>
+
+</dd>
+<dt id="option.rollback">rollback (<b><i>LiveUSB Only</i></b>)</dt>
+<dd>
+
+<p>Roll back to the previous version of <span class="file"><i>linuxfs</i></span>. If you remaster and for some reason things go horribly wrong, then use this feature to get back to the state right before you did the remaster.</p>
+
+</dd>
+</dl>
+
+
+<div class="blue"><h2 id="X-Windows">X-Windows</h2></div>
+
+<p>These options affect X-windows. They will all be carried over when you do an install. The various keyboards options are carried over in the file <span class="file"><i>/etc/defaults/keyboard</i></span>. The other options are carried over in the file <span class="file"><i>/etc/X11/xorg.conf</i></span>.</p>
+
+<h2 id="Keyboard-Options">Keyboard Options</h2>
+
+
+<p>A rather complete list of keyboard options and variants is usually available at <a href="file:///usr/share/X11/xkb/rules/xorg.lst">/usr/share/X11/xkb/rules/xorg.lst</a></p>
+
+<dl>
+
+<dt id="option.kbd=">kbd=*</dt>
+<dd>
+
+<p>Set the keyboard layout. This is usually one or more 2-letter country codes separated by commas. For example: <b>kbd=gr,us</b>. This will allow users to quick switch between the US and the Greek keyboard layouts.</p>
+
+</dd>
+<dt id="option.kbopt=">kbopt=*</dt>
+<dd>
+
+<p>Keyboard options. These give special meaning to certain keys or key combinations. For example <b>kbopt=ctrl:nocaps</b> turns the Caps Lock key into an extra Control key.</p>
+
+</dd>
+<dt id="option.kbvar=">kbvar=*</dt>
+<dd>
+
+<p>Keyboard variant. These are variants to the keyboard layout. For example <b>kbvar=dvorak</b> will give you a <a href="https://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak</a> keyboard layout when you use the <b>us</b> layout.</p>
+
+</dd>
+</dl>
+
+<h2 id="Video-Options">Video Options</h2>
+
+
+<p>These options affect the X-windows video.</p>
+
+<dl>
+
+<dt id="option.dpi=">dpi=*</dt>
+<dd>
+
+<p>DPI stands for &quot;dots per inch&quot;. It controls the size of most fonts. A larger DPI value will give you larger fonts and as smaller value will give you smaller fonts. The default is <b>96</b>. This setting is stored in the <i>Display Manager</i> configuration file. On <b><i>antiX</i></b> this is <span class="file"><i>/etc/slim.conf</i></span>.</p>
+
+</dd>
+<dt id="option.xdrvr=">xdrvr=*</dt>
+<dd>
+
+<p>Force a particular video driver to be used. By default, the X-Windows server will choose a driver that is tailored to work with your specific video hardware. Sometimes that driver will fail on unusual or very old hardware. You may need to add the <b>nomodeset</b> boot option to prevent a video driver from taking control of the video hardware before X-Windows starts. You can use <span class="file"><i>inxi</i></span> to check which driver is actually being used:</p>
+
+<pre><code> inxi -G</code></pre>
+
+</dd>
+<dt id="option.xorgconf">xorgconf</dt>
+<dd>
+
+<p>Create an <span class="file"><i>xorg.conf</i></span> file. If <b>xdrvr</b> or <b>xres</b> are given then <span class="file"><i>xorg.conf</i></span> will be created automatically so there is usually no point in using this options.</p>
+
+</dd>
+<dt id="option.xres=">xres=*</dt>
+<dd>
+
+<p>Set the <i>default</i> screen resolution in <span class="file"><i>xorg.conf</i></span>. This is usually not needed because Xorg will automatically set the resolution. All resolutions that are found by probing your hardware will also be added as alternatives to the default.</p>
+
+</dd>
+</dl>
+
+
+<div class="blue"><h2 id="personalization">Personalization</h2></div>
+
+<p>These options let you customize or personalize your system. They will all be carried over to the hard drive when you install.</p>
+
+<dl>
+
+<dt id="option.hostname=">hostname=*</dt>
+<dd>
+
+<p>Set the hostname of the system. The default hostname is <code>antiX1</code>.</p>
+
+</dd>
+<dt id="option.lang=">lang=*</dt>
+<dd>
+
+<p>In <b><i>antiX</i></b>, this option sets more than just the language. It also sets the keyboard layout, the Debian mirror, and the timezone. If you set any of these others explicitly then that setting will over-ride the value set via <b>lang</b>.</p>
+
+</dd>
+<dt id="option.mirror=">mirror=*</dt>
+<dd>
+
+<p>Set the country of the Debian mirror. Usually this option is set to a 2-letter country code such as <b>mirror=gr</b>.</p>
+
+</dd>
+<dt id="option.tz=">tz=*</dt>
+<dd>
+
+<p>Set the timezone. Example: <b>tz=America/Denver</b>. Some languages, such as en_US (United States English) cover more than one timezone so setting the <b>lang</b> may not set the correct timezone.</p>
+
+</dd>
+</dl>
+
+<div class="blue"><h2 id="other">Other Live System Features</h2></div>
+
+<p>These options control features that are specific to the Live system but don&#39;t fit into any of the previous categories. Some of these are available in the bootloader menus.</p>
+
+<dl>
+
+<dt id="option.antiX=">antiX=*|aX=*</dt>
+<dd>
+
+<p>Disables certain startup services for a faster boot and a smaller, faster system. Valid values are a combination of the following letters:</p>
+
+<pre><code> L = lean        Turn off some services
+ M = mean        Turn off some networking services
+ X = Xtralean    Turn off even more services
+ D = nodbus      Dont&#39; launch dbus</code></pre>
+
+</dd>
+<dt id="option.checkfs">checkfs (<b><i>LiveUSB Only</i></b>)</dt>
+<dd>
+
+<p>Perform file system check on the <b>LiveUSB</b>. This won&#39;t check the file system of a LiveCD. Will also check the filesystem of the persistence device (if different from the boot device) and the file systems on the persistence files <span class="file"><i>rootfs</i></span> and <span class="file"><i>homefs</i></span> if they exist and are enabled. It will only check the following types of file systems: ext2, ext3, and ext4.</p>
+
+</dd>
+<dt id="option.gfxsave=">gfxsave=* (<b><i>LiveUSB Only</i></b>)</dt>
+<dd>
+
+<p>Set the bootloader current bootloader settings as the defaults. Valid values: <b>custom</b>, <b>menus</b>, <b>both</b>, and <b>reset</b>.</p>
+
+</dd>
+<dt id="option.md5">md5|checkmd5</dt>
+<dd>
+
+<p>Check the md5sum of the three primary files needed to boot a live system: <span class="file"><i>linuxfs</i></span>, <span class="file"><i>vmlinuz</i></span>, and <span class="file"><i>initrd.gz</i></span>. If this test passes then your boot media should be good although this won&#39;t necessarily catch intermittent problems.</p>
+
+</dd>
+<dt id="option.nocheckfs">nocheckfs</dt>
+<dd>
+
+<p>The LiveUSB acts like an installed system and will automatically check its own filesystem based the time since the last check and/or the number of mounts since the last check. Use this option to turn this feature off.</p>
+
+</dd>
+<dt id="option.toram">toram</dt>
+<dd>
+
+<p>Copy the entire <span class="file"><i>linuxfs</i></span> file into RAM. This takes up RAM. The amount of RAM used will be about the same as the size of the .iso file used to create the LiveCD or LiveUSB. It will also take some time when you first boot to copy the file into RAM. But after this, the system will run very fast. You can also eject the LiveCD (or remove the LiveUSB while the system is running.</p>
+
+<div class="footer">Version: 0.2<br />
+Last updated 2014-05-08</div>
+</body>
+</html>
+
+

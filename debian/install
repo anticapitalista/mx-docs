@@ -1,0 +1,3 @@
+changelog.gz               /usr/share/doc/docs-mx 
+copyright                  /usr/share/doc/docs-mx
+doc/*                      /usr/local/share/doc 

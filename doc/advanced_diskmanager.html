@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Disk Manager</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Disk Manager</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>
+DM provides a graphical presentation of all the partitions on the machine (excluding swap) with a simple interface for quickly and easily mounting, unmounting and editing some properties of disk partitions. Changes are automatically written to <a href="http://www.wikipedia.org/wiki/Fstab" >/etc/fstab</a> on Save or Exit and are thus preserved for the next boot.</p>
+
+<p>DM automatically allocates mount points in /media, using /media/LABEL (e.g., /media/HomeData) if the partition is labelled or /media/DEVICE (e.g., /media/cdrom) if not. These mount points are created by DM when a partition is mounted, and removed on Save or Exit when a partition is unmounted.</p>
+
+<div class="blue"><h2>Warnings</h2></div>
+
+<ul><li>Because Disk Manager writes directly to a critical system configuration file, make sure all the right boxes are checked and all the right settings are applied before you exit. If you have questions about how to proceed, post over on <a href="http://forum.mepiscommunity.org/viewforum.php?f=91" >the MX Forum</a>.
+<li>DM is intended for use on local partitions only. If you have remote partitions listed in fstab, they will be ignored or possibly even destroyed--so check fstab <i>before</i> rebooting.</li></ul>
+
+<div class="blue"><h2>Interface</h2></div>
+<h3>Menu bar</h3>
+<ul><li><b>File</b></li>
+<ul><li>Save: saves the current settings.
+<li>History: opens a full history dialog box with 3 buttons:
+<ul><li>Empty the log</li>
+<li>View config: views /etc/fstab for the selected item</li>
+<li> Apply: writes the selected settings to /etc/fstab</li></ul></ul>
+<li><b>Edit</b></li>
+<ul><li>Undo: reverse the operation(s) since the previous save</li></ul>
+<li><b>Help</b></li> 
+<ul><li>Help Docs
+<li>About: version details</li></ul></ul>
+
+<h3>Main window</h3>
+<ul><li>Check/uncheck the box of a highlighted partition to mount/unmount</li>
+<li>For mounted ntfs partitions, click on the driver name to get a handy pull-down menu of alternate possibilities.</li>
+</ul>
+
+<h3>Bottom buttons</h3>
+<ul><li><b>Edit</b>: the mount point can be changed and mount options added or edited. 
+<li><b>Mount/Unmount</b>: the mount status of a partition can be changed by highlighting it and clicking this button. Will be greyed out for partition currently being used.
+<li><b>Information</b>: highlight a partition and click this for details of the Drive, Volume & Size. The Back & Forward buttons on the Information display allow you to scroll through the partitions. Only total size will be shown for unmounted partitions.</li></ul>
+
+<div class="blue"><h2>Use</h2></div>
+<h3>Mounting & Unmounting</h3>
+To mount/unmount a partition quickly, tick/untick the box at the left end of its entry or use the Mount/Unmount button at the bottom.
+<h3>Editing</h3>
+The partition options can be altered using the Edit button. The dialog box that pops up has 3 entries:
+<ul><li><b>Driver</b>: the driver for a partition can be changed (shows for ntfs only)
+<li><b>Mount point</b>: can be altered
+<li><b>Options</b>: can be added or edited
+<li>You can also choose to have the device checked every n times it boots</ul>
+
+<div class="blue"><h2>Known issue</h2></div>
+On some machines for unknown reasons, DM uses: "ntfs (unknown driver)" for ntfs partitions, which is read-only. To change to read/write, take the following steps: 
+<ol><li>Highlight the partition
+<li>Click the Edit button at the bottom
+<li>Change the Driver to "ntfs-3g (Read-write driver)"
+<li>Save
+</li></ol>
+
+<div class="blue"><h2>Help</h2></div>
+<ul><li><a href="http://doc.ubuntu-fr.org/disk-manager">DM guide</a> (in French)</li>
+<li><a href="http://ubuntuforums.org/showpost.php?p=11955166&postcount=6" >Ubuntu discussion</a> of ntfs issue</li></ul>
+</u>
+
+<div class="footer">Version: 0.2<br />
+Last updated 2014-07-27</div>
+</body>
+</html>
+
+</div>

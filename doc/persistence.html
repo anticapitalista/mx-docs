@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Persistence</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Persistence</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="sect1">
+
+<div class="blue"><h2>Introduction</h2></div>
+<div class="sectionbody">
+<div class="paragraph"><p>Persistence is a hybrid between a LiveCD/USB and a full install.</p></div>
+</div>
+</div>
+<div class="sect1">
+
+<div class="blue"><h2>Step-by-step</h2></div>
+<div class="sectionbody">
+<div class="paragraph"><p>The persistence files (rootfs and homefs) are straightforward to create once you know the trick. You just need to decide how large you want to make the file and what file system to use. If you have a lot of free space on the device (many Gigs) then a size of 1 Gig is a good choice although you can get by with much less. We suggest using the ext3 file system but you can also use ext2 or ext4.</p></div>
+
+<h3>The basic steps</h3>
+<p>There are many options available, so here is one good method to get you started. <a href="http://www.mepiscommunity.org/videos/live-usb-persistence" ><b>This video</b></a> shows the procedure one step at a time.</p>
+<ol><li>Make a LiveUSB (see Note below)</li>
+<li>Click Start menu > System > RemasterCC. A screen pops up with four buttons; click on Set up Live Persistence</li>
+<li>Create persistence files (if UNetbootin used to make the LiveUSB)</li>
+<li>Reboot and select <q>Root Persistence</q> from main bootloader menu</li>
+<li>Enter new passwords</li>
+<li>Now whenever you log out, you will be prompted to save the changes you have made during your session, and they will be retained (persist) for the next session.</li>
+</ol>
+
+<div class="paragraph"><p><i><u>Step 1 Notes</u>: Download the iso file. If you are already running an installed version of MX-14, use the antix2usb application by clicking Start menu > Accessories > live usb.  This is the easiest way to go since you simply check the boxes in the lower right corner to create the persistence files. Otherwise, use <a href="http://unetbootin.sourceforge.net/"> UNetbootin</a> to create the LiveUSB. </i></p>
+<p><i><u>Step 3 Notes</u>: If unsure about what choices to make, use the action pull-down menu and select first <b>Root: Create Root Persistence</b> (recommended: ext2 and 1 GB). When that has finished, then select <b>Home: Create Home Persistence</b> (recommended ext4 and enough memory for what you intend to use it for). For home persistence, the homefs persistence file is mounted at /home. Any changes made to files under /home are (nearly) instantly stored on homefs filesystem. It is good if you want to save settings (such as bookmarks or changes to your desktop) but it does not save changes made to the system (such as installing packages</i></p>
+<p><i><u>Step 4 Notes</u>: You will be prompted for a new root and user password; this is needed because the LiveUSB passwords are public knowledge.</i></p>
+
+<h3>The tool: details</h3>
+<p>RemasterCC is the same tool that is used for making a <a href="remaster.html" >remaster</a>, since the beginning steps are identical. Only three of the four buttons will be used, and in fact the easiest method is to just use the first, as described above.</p>
+<ul><li><b>Set up live persistence</b>. If you made your bootable usb with unetbootin or similar tool, you can use this option to create a new persistence file which will let the user save changes made to the file system for future boots. </li><li><b>Configure live persistence</b>. This will set how the liveUSB will save the persistence file. Although there is an automatic option, is does not currently work. The semi-automatic option is the default, whereby changes will be saved at logout. There is also a manual save option. Again, this is not strictly speaking required for the remaster to work.</li><li><b>Save root persistence</b>. This is how you save your filesystem changes to the persistence file in the event you elected a manual save option. This will also work if you just want to save changes immediately rather than waiting for logout in semi-automatic mode.</li><li><b>Remaster</b>. Not being used.</li></ul>
+
+<div class="blue"><h2>Advanced</h2></div>
+<ul>
+<li>Frugal install: see <a href="advanced_frugal.html" >this page</a></li> 
+<li>Dynamic and static root persistence.
+<ul><li>Dynamic root persistence saves file system changes in RAM (just like a normal LiveCD/USB). The persist-save program must be run to copy these changes to the rootfs file so the can be remembered across reboots. Use persist-config to have the program run automatically on shutdown/reboot.</li>
+<li>Static root persistence saves file system changes directly in the rootfs file. It does not use any RAM so the only size limit is the size of the rootfs file. This makes it good for doing an "apt-get upgrade" or for installing a bunch of packages. It is usually best to follow up with a Live remaster to consolidate the file system changes into the compressed squashfs file.</li>
+</ul>
+<p>On many systems, static root persistence can be annoyingly slow. You are free to switch between static and dynamic root persistence each time you boot.</p></li>
+</ul>
+
+
+<div class="footer">MX-14 version: 0.8, modified from antiX version 0.1.2<br />
+Last updated 2014-06-28</div>
+</body>
+</html>
+

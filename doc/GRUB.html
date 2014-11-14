@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: GRUB</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: GRUB</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="browser.html" >Browser</a>  | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="GRUB.html" >GRUB</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>This document concerns the bootscreens seen by users of MX-14 that are produced by the bootloader&#151;of which the best known example is GRUB.  The bootloader is the first software program to run and is responsible for loading and transferring control to the kernel.  The screens for MX-14 are particularly important, offering many options for particular situations.</p>
+
+<div class="blue"><h2>Live bootscreen</h2></div>
+
+<p>The live bootscreen (created by isolinux for CDs, syslinux or extlinux for USB sticks) contains the following entries (top to bottom, use keyboard arrows to highlight selection):</p>
+<ul><li><b>The highlighted default option</b> with the name of the ISO, e.g., MX-14 13.97 386-xfce (22 January 2014).  This default choice will boot automatically unless you use the cursors to select another entry from the menu.  Using this method to install MX is recommended for users new to Linux.</li>
+<li><b>Command Line Install</b>.  This option is for more advanced users.  It will perform the same booting sequence as the previous option, but when finished it will leave you at a command line prompt (i.e., no graphical interface like a desktop).  You will be required to enter the root password (&#8220;root&#8221;, without the quotation marks) to continue.  Once logged in as root, launch the installer with the command <code>cli-installer</code> and follow the instructions to install.</li>
+<li><b>Root Persistence, Static Root Persistence, Home Persistence</b>.  See <a href="persistence.html" >Persistence</a>
+<li><b>Boot from Hard Disk</b>.</li>
+<li><b>Memory Test</b>.  This will run software designed to test and stress-test a computer's random access memory (RAM) for errors.</li></ul>
+
+<h3>Options</h3>
+<p>On the lower part of the screen, you can use the Function keys to select options in order to change the settings indicated below each one. (For recent changes consult <a href="bootoptions.txt" >Live Boot Options</a>.)</p>
+<ul><li><b>F1 The Help System</b>.  This important option provides usernames and passwords for Live use, and information about the remaining options.</li>
+<li><b>F2 Select Language</b>.</li>
+<li><b>F3 Select Timezone</b>.  </li>
+<li><b>F4 Miscellaneous Options</b></li>
+<li><b>F5 Video Mode</b> </li>
+<li><b>F6 Console settings</b>. Set resolution of virtual consoles.</li>
+<li><b>F7 DPI</b> on cd. <b>Save</b> on usb</li> 
+<li><b>F10 Reboot or Power off the system</b></li>
+<li><b>F11 Toggle menu colours</b>. 3 are available</li>
+<li><b>F12 Display current boot codes</b></li></ul>
+
+
+<div class="blue"><h2>Installed bootscreen</h2></div>
+<p>Once MX-14 has been installed, the screen produced by <a href="https://en.wikipedia.org/wiki/GNU_GRUB">GRUB2</a> lists what it finds in the local system.</p>
+<ul><li>Available bootable installations</li>
+<li>Partitions</li>
+<li>Memory test</li></ul>
+<p>There is also an entry for Advanced options, where such things as available kernels for a particular installation are listed.</p>
+<p>Advanced options are listed at the bottom of the screen. </p>
+<ul><li>Press &#8216;<b>e</b>&#8217; (without the quotes) to edit the commands before booting</li>
+<li>Press &#8216;<b>c</b>&#8217; (without the quotes) to exit the graphical display and end up at a command line.</li></ul>
+<h3>Configuration</h3>
+<p>The GRUB menu of an installed MX-14 can be modified with two very handy graphical tools, both in Start menu > System.</p>
+<ul><li><b>Grub customizer</b>. This tool allows users to configure some important Grub settings such as the boot entry list configuration.</li>
+<li><b>Disk manager</b>.  With this utility you can easily manage partitions, filesystem and NTFS support.</li></ul>
+
+<div class="blue"><h2 id="repair">Repair</h2></div>
+<p>It sometimes happens that GRUB becomes dysfunctional, usually because the user has made changes of some kind.  When that happens, GRUB can be restored to a functional state, depending on the exact problem.</p>
+<ul><li>You can boot into at least one partition.</li>
+<ul><li>Boot into the good partition</li>
+<li>Open a terminal and become root</li>
+<li>Enter the command <code>update-grub</code> and press return.</li>The program will probe for drives and partitions, then exit.  Examine the screen to see what has been found
+<li>Reboot to enter the partition of your choice.</li>
+</ul>
+<li>You are unable to boot into any partition</li> 
+<ul><li>Boot to the Live medium.</li><li>Click Start Menu > System > MX Boot Repair, providing root's password ("root")</li><li>Consult <a href="mxapps.html#bootrepair">this document</a> for help on using this utility.</li><li>When you reboot without the Live device, the GRUB screen should look and function normally.</li></ul></ul> 
+
+
+<div class="blue"><h2>Help</h2></div>
+<p>For more information about GRUB, see the <a href="http://www.gnu.org/software/grub/grub-documentation.html">GNU Grub Documentation</a> </p>
+
+<div class="footer">Version: 1.1<br />
+Last updated 2014-04-19</div>
+</body>
+</html>

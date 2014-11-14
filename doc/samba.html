@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Samba</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Samba</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>Samba is a cross-platform network file sharing protocol for Linux, Windows, and Mac OS X.</p>
+
+<h3>Connecting to Shares</h3>
+<p>See the explanation of <a href="files.html#shares"> how to use Thunar</a> to connect.</p>
+
+
+<div class="blue"><h2>Network Printing</h2></div>
+Samba on MX-14 allows printing via the network to shared printers on other computers (Windows, Mac, Linux) and NAS (Network Attached Storage) devices offering Samba services.
+
+<h3>Using the MX-14 Printing Utility to Set Up Printers</h3>
+<ul>
+<li>Click Start menu > Printing - Configure Printers utility
+<li>Select Server > New > Printer
+<li>Select Network Printer > Windows Printer via SAMBA
+<li>In the dialog window for smb:// enter either servername/printername or server-ipaddress/printername.  For example: bigserver/usbprinter1 or 192.168.0.100/printer2
+<li>If you have trouble identifying the server and printer names, click Start menu > System > <a href="mxapps.html#findshares"> MX Find Shares </a>for details.
+<li>Leave the button selected for Prompt user if authentication is required, then click Forward
+<li>Leave the button selected for Select printer from database and then click Forward
+<li>Select the driver and then Forward
+<li>Describe Printer if necessary and then Apply
+<li>When the printer appears in the window, RC Properties > Print Test Page to make sure the connection and driver are operating correctly.
+</li>
+</ul>
+<h3>Using the MX-14 Printers (CUPS) Utility to Set Up Printers</h3>
+<ul>
+<li>Click Start menu > Printers (CUPS) -- Manage Printers in a Browser utility
+<li>Select Adding Printers and Classes > Add Printer
+<li>In the dialog window enter root's password
+<li>In Add Printer > select appropriate choice (e.g., Windows Printer via SAMBA) > Continue
+<li>In the Connection window, enter <i>smb://servername/printername</i> using same method of finding these names as in Printing utility instructions above > Continue
+<li>Enter printer name and descriptions as you would like...<b>Do not</b> tick Share This Printer > Continue
+<li>Select the printer Make > Continue > Add Printer > choose various options > Set Default Options
+<li>Go to Maintenance > Print Test Page to make sure the connection and driver are operating correctly
+</li>
+</ul>
+<div class="blue"><h2>Creating Shares</h2></div>
+On MX, Samba can also be used to create Shares for other computers (Windows, Mac, Linux) to access.  Creating Public Shares is fairly straightforward, but keep in mind that creating Samba Shares is a complex area from a configuration perspective. For example, the task creating Shares that are specific to individual users and are authenticated properly is beyond the scope of this help. Comprehensive reference guides can be found at <a href="http://oreilly.com/openbook/samba/book.html">Using Samba</a> and <a href="http://www.samba.org/">Samba.org</a>.
+<h3>Basic method</h3>
+<p>Click Start menu > System > Samba to bring up the Samba Server Configuration tool. Click on the plus sign icon to add a share; details available by clicking on the Help icon. A good video on this is available <a href="http://www.mepiscommunity.org/videos/samba-config-tool" >here</a>.</p>
+<h3>Manual method</h3>
+<p>If for some reason you need or want to create shares manually, you will need to follow the following steps. A helpful video on the topic is available <a href="http://www.mepiscommunity.org/videos/samba-config-manual-method" >here</a>.</p>
+<ul>
+<li>Use an existing /home/foldername or create a folder and make it Read &#38; Write for Owner, Group: users, and Others. In other words, make it open to the world. Starting with a simple Public Share is a good place to learn.
+<br><br>
+<b>Note</b>: If you are concerned about network security do not use this approach. Instead, study the references above to learn how to create secure shares. 
+<br><br>
+<li>To establish the Samba Share, you must edit the configuration file as root. It can be found at: <i>/etc/samba/smb.conf</i>
+Edit the line <code>workgroup = xxxxx</code> to match whatever Windows Workgroup name you are using (default is WORKGROUP)
+<li>At the very end of the file add the following lines to establish your Share
+<pre><code>[SHARENAME]
+path = /home/username/foldername 
+guest ok = yes 
+read only = no 
+browseable = yes
+force create mode = 777
+force directory mode = 777
+</code></pre>
+<li>Save the file. When adding a share, the Samba daemon should read it and implement the changes immediately.  If you make changes to an existing share, you will need to restart Samba to make sure your changes take effect by going to the terminal and putting in: <code> sudo service samba restart</code>
+<li>You can also check for mistakes in smb.conf by running <code>testparm</code> from the terminal
+<li>Go to another computer and test your ability to see your Samba Share by browsing the network and testing read & write to the Share
+</li>
+</ul>
+
+
+<div class="blue"><h2>Help</h2></div>
+<ul>
+<li>On Samba, the e-book <a href="http://www.samba.org/samba/docs/man/using_samba/toc.html">Using Samba</a> contains useful guidance.</li></ul>
+
+<div class="footer">Version: 0.8<br />
+Last updated 2014-06-29</div>
+</body>
+</html>

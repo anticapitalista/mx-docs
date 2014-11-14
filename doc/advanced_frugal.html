@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Frugal Install</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14 Frugal Install</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div id="body-text">
+
+<div class="blue"><h2>Introduction</h2></div>
+
+<p>New for MX-14.1! Automatically do a frugal install from a LiveCD or LiveUSB to a hard drive or a USB drive. Persistence files can also be created automatically so you can literally create and boot into an installed system in just a minute or two (depending on the speed of your hardware).</p>
+
+<div class="blue"><h2>Description</h2></div>
+
+<p>There are two modes of operation that are triggered by the same frugal boot parameter: install mode and boot mode. Normally the frugal device is a partition with the label <b>MX-Frugal</b>. If such a device is not found then you will be given a list of partitions to choose from. Once you have selected a device, you will be given an option to have it be given the MX-Frugal label. If an MX frugal install has not already been done on the device you selected then a frugal install will be performed.</p>
+
+<p>The next time you boot with the frugal option, it will automatically boot from the MX-Frugal device into the frugal system that was installed. Again, if a frugal install is not found on that device, you will be given the option to automatically create one. If persistence is requested and the persistence files are not found then we will offer to create them after we do the install. If you want to force a persistence file to be created in a later boot, select that form of persistence with an exclamation point: <code>frugal=root!</code>.</p>
+
+
+<div class="blue"><h2>Definitions</h2></div>
+
+<p>You will see a number of terms when you select a frugal install that need to be defined.</p>
+<table>
+<tr class="blue">
+	<td><b>Term</b></td> 
+	<td><b>Meaning</b></td> 
+</tr>
+<tr>
+	<td><i> frugal </i></td> 
+	<td>Enable frugal mode. Either boot into the existing frugal system or create a new one if it does not already exist.</td> 
+</tr>
+<tr>
+	<td><i> frugal= </i></td>
+	<td> A contraction of frugal persist=*. It is common to add persist options when enabling frugal mode so you can add the persist options directly to the frugal boot parameter. Examples: <code>frugal=root</code> or <code>frugal=home</code>.</td>
+</tr>
+<tr>
+	<td><i> fdev </i></td>
+	<td>The name of the frugal device.</td>
+</tr>
+<tr>
+	<td><i> flab </i></td>
+	<td>The partition label of the frugal device.</td>
+</tr>
+<tr>
+	<td><i> fuuid </i></td>
+	<td>The UUID of the frugal partition.</td>
+</tr>
+</table>
+
+
+<div class="footer">MX-14 version: 0.2<br />
+Last updated 2014-06-12</div>
+</body>
+</html>
+

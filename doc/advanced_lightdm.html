@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Advanced: Lightdm Greeter</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Advanced: Lightdm Greeter</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+
+<div class="blue"><h2>Introduction</h2></div>
+The display manager used by MX Linux is <a href="http://www.freedesktop.org/wiki/Software/LightDM/">Lightdm</a>, and it supplies the login greeter that every user sees. Here are a couple of simple modifications that users may want to consider.
+
+<div class="blue"><h2>Restart button</h2></div>
+<p>Follow these directions to add a Restart button to the login greeter.</p>
+<ul>
+<li>RC <a href="greeter.ui">this link</a> and save it in your Documents folder or somewhere else where you can easily find it again.</li>
+<li>Navigate in Thunar to <b>/usr/share/lightdm-gtk-greeter/</b></li>
+<li>RC an empty space > Open root Thunar here, and provide pwd if necessary</li>
+<li>RC the file <b>greeter.ui</b> and rename it to <b>greeter.ui.bak</b></li>
+<li>Hit Ctrl-T to create a tab, and navigate back to /Home/Documents/</li>
+<li>RC the file you just saved > Copy</li>
+<li>Click on the first tab to return to /usr/share/lightdm-gtk-greeter/, then RC an empty space > Paste (you should still be root)</li>
+<li>Close Thunar and log out--you should now see a "Restart" button</li>
+<li>If you want to return to the original, then navigate back to the greeter location, RC the greeter.ui file > Delete, then RC greeter.ui.bak and rename it to greeter.ui</li></ul>
+
+<div class="blue"><h2>Autologin</h2></div>
+<p>In most cases, users will have selected during installation to log in manually; sometimes, however, a user will check the "autologin" box during installation. Both procedures can be reversed.</p>
+<ul><li>Open Thunar, and navigate to <b>/etc/lightdm/</b>.
+<li>RC an empty space > Open root Thunar here. </li>
+<li>Open the file <b>lightdm.conf</b> in Leafpad or another text editor.</li>
+<li>Click Options > Line Numbers, and navigate to line 88.</li>
+<li>A hash (&#35;) in front of the line forces the user to log in; no hash allows autologin.</li>
+<p>No autologin: <code>#autologin-user=yourusername</code></p>
+<p>Autologin: <code>autologin-user=yourusername</code></p>
+<li>Note that there is an option in the following line (89) to run autologin after a delay</li>
+<li>Save and close the file.</li></ul>
+
+
+<div class="blue"><h2>Help</h2></div>
+<p>For other types of modifications, see the <a href="http://www.freedesktop.org/wiki/Software/LightDM/CommonConfiguration/">Lightdm documentation</a>.</p>
+
+<div class="footer">Version: 0.2<br />
+Last updated 2014-06-25</div>
+</body>
+</html>

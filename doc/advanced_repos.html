@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Default repositories</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Default repositories</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p> This document describes the various repositories included by default in the most recent release. For information on how to manage these repos, see <a href="synaptic.html#repos">Synaptic</a>. </p> <p><b>Validity: MX-14.2, released June 30, 2014</b></p>
+
+<div class="blue"><h2>Default repositories</h2></div>
+<p>Sources of software packages are listed in 4 files contained in <b>/etc/apt/sources.list.d/</b>. Note that users may see minor changes due to localization (e.g., http://ftp.<b>uk</b>.debian.org/debian/ instead of http://ftp.<b>us</b>.debian.org/debian/). </p>
+
+<h3>antix.list</h3>
+
+# Use with Debian Wheezy repository. Set as default for MX-14 <br />
+deb http://antix.daveserver.info/stable/ stable main 
+
+
+<h3>debian.list</h3>
+
+# Debian Stable<br />
+deb http://ftp.us.debian.org/debian/ wheezy main contrib non-free <br />
+deb http://security.debian.org/ wheezy/updates main contrib non-free <br />
+# deb-src http://ftp.us.debian.org/debian/ wheezy main contrib non-free <br />
+
+# Wheezy backports <br />
+deb http://ftp.us.debian.org/debian/ wheezy-backports main contrib non-free <br />
+
+# Multimedia Stable<br />
+# deb http://www.deb-multimedia.org/ wheezy main non-free
+
+
+<h3>mepis.list</h3>
+
+# Mepis Community Main and Test Repos <br />
+deb http://main.mepis-deb.org/mepiscr/xfce/ xfce-4.10 main <br />
+deb http://main.mepis-deb.org/mepiscr/repo/ mepis12cr main non-free <br />
+# deb http://main.mepis-deb.org/mepiscr/mx-test/ mx-14 test <br />
+# deb http://main.mepis-deb.org/mepiscr/testrepo/ mepis12cr test <br />
+
+
+<h3>various.list</h3>
+
+# opera <br />
+# deb http://deb.opera.com/opera/ stable non-free <br />
+
+# virtualbox <br />
+# deb http://download.virtualbox.org/virtualbox/debian/ wheezy contrib <br />
+
+# MATE <br />
+# deb http://repo.mate-desktop.org/debian/ wheezy main <br />
+
+# GAMES - gottet, peg-e and simsu <br />
+# deb http://download.opensuse.org/repositories/home:gottcode/Debian_7.0/ / <br />
+
+# Latest iceweasel (australis) <br />
+# deb http://mozilla.debian.net/ wheezy-backports iceweasel-release 
+<br />
+<br />
+
+<div class="footer">Version: 0.2<br />
+Last updated 2014-07-27</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+Open <a href="synaptic.html">Synaptic</a> and click Settings > Repositories
+Check the box to enable this repo: http://main.mepis-deb.org/mepiscr/testrepo/
+Close the Repositories window, then click the Reload button, and wait for it to finish.
+Click the search icon (magnifying glass) on the menu bar and type <b>conky-manager</b>. Then click SEARCH.
+When it is finished, mark conky-manager for installation
+A small window will open up stating that you also need to download additional files with them. Click Mark.
+Click Apply
+After installation is completed, reopen Settings > Repositories and uncheck the .../testrepo box. Then exit and close Synaptic. 
+Click Start menu > Accessories to find Conky Manager
+In Conky Manager, you can highlight each conky and hit PREVIEW to see what it looks like. Be sure to close each preview before going to another. It will seem that Conky Manager has frozen. It is because there is a hidden window with the preview hiding behind it.
+When you have decided which to use, CHECK the box and select it. Auto-installed.
+
+Extra themes:
+http://www.teejeetech.in/2013/07/deluxe-conky-theme-pack.html

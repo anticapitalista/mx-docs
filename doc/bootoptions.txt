@@ -1,0 +1,154 @@
+Live Bootloader
+===============
+
+Live Bootloader Main Menu
+-------------------------
+
+    o MX-<VERSION> (<RELEASE DATE>)
+        This is the standard way to boot the Live system.
+
+    o Command Line Install
+        Boot directly to the command line.  Do not start
+        X-windows.  This can be useful to install on systems
+        with very limited RAM.
+
+    o Root Persistence
+        (LiveUSB only)
+        Enable root persistence so a LiveUSB acts like an
+        installed system.  Optionally enable home persistence if
+        the homefs file is available.  Requires a rootfs file
+        created by RemasterCC to hold the file system changes.
+        
+    o Static Root Persistence
+        (LiveUSB only)
+        Just like root persistence but changes are saved
+        immediate to disk instead of being stored in RAM.  This
+        can be much slower but it does not consume RAM and the
+        only size limition is the size of the rootfs file.
+
+    o Home Persistence
+        (LiveUSB only)
+        Only enable home persistence.  This saves files and
+        settings in your home directory but does not save
+        system-wide settings are packages that have been
+        installed.  Requires a homefs file created by RemasterCC.
+
+    o Boot from Hard Drive
+        Boot from the first internal hard drive.
+
+    o Memory Test (memtest86+)
+        Run a test to check RAM.  If this test passes then there
+        may still be a hardware problem or even a problem with
+        RAM but if the test fails then you know something is
+        wrong.
+
+If you have used "F7 Save" on a LiveUSB then a Custom entry may
+also appear in the main menu.
+
+
+Live Bootloader Popup Menus
+---------------------------
+
+o F1 Help
+    Help system in English only.  Contains much of the same
+    information that is given here.
+
+o F2 Language
+    Set the language for the bootloader and the MX system.  This
+    will automatically transfer to the hard drive when you
+    install.
+
+o F3 Time Zone
+    Set the timezone for the system.  This will automatically
+    transfer to the hard drive when you install.
+
+o F4 Options
+    Options for checking and booting the Live system.  Most of
+    these options do not transfer to the hard drive when you
+    install.
+
+    check md5
+        Check the integrity of the Live media.
+
+    check fs
+        (LiveUSB only) Check the file system(s) of the boot
+        media.
+
+    to ram
+        Transfer the Live system to RAM for faster operation.
+
+    no usb-2
+        Can help to boot LiveUSB on some older system.
+
+    no acpi
+        Can help to boot LiveCD and LiveUSB aon some older
+        systems.  This options transfers when you install.
+
+    HP Laptop
+        Enable control of screen backlight on some HP laptop
+        systems.  This option transfers when you install.
+
+o F5 Video Mode
+    These options can help when you have trouble getting
+    X-windows to work.  They can also help if the screen suddenly
+    goes blank or loses sync early in the boot process which can
+    be caused by a problem with <a
+    href=https://wiki.archlinux.org/index.php/kernel_mode_setting>
+    Kernel Mode Setting.</a> (KMS).  These options will transfer
+    when you install.
+
+    vesa
+        This is the safest boot mode available.  It disables
+        Kernel Mode Setting and forces use of the vesa driver
+        which works with almost all hardware.  Do not exect great
+        graphics performance.  This is plan-C.
+
+    safe
+        Disable Kernel Mode Setting but allow the system to
+        select a hardware specfic graphics driver.  This is
+        plan-B.
+
+o F6 Console
+    Set resolution of virtual consoles.  May conflict with Kernel
+    Mode Setting.  Can be useful if you are booting into Command
+    Line Install or if you are trying to debug the early boot
+    process.  This option will transfer when you install.
+
+o F7 DPI
+    (LiveCD)
+    Set the dots-per-inch in X-windows.  This will scale the font
+    sizes.  The larger the DPI, the larger the fonts will be.
+    This setting will transfer when you install.
+
+o F7 Save
+   (LiveUSB)
+   This can save all your menu selections and typed-in boot
+   parameters as the new defaults.  It is a very easy way to
+   quickly customize a LiveUSB for language and timezone.
+
+    menus
+        Use the current menu selections as the defaults.
+
+    custom
+        Create a new main menu entry using any boot codes you
+        have entered manually.  If you don't enter any boot codes
+        then an custom entry won't be made.
+
+    both
+        Use the current menu selections as the defaults and also
+        create a custom main menu entry.
+
+    reset
+        Remove any custom main menu entry and restore the
+        original menu defaults.
+
+
+Other Live Bootloader Function Keys
+-----------------------------------
+
+o F10
+    Reboot or Power off the system.
+
+o F12
+    Display current boot codes including those selected by the
+    popup menus. 

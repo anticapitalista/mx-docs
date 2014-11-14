@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Sound</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Sound</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click   </div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>MX Linux sound depends by default on <a href="http://www.alsa-project.org/main/index.php/Main_Page" >Advanced Linux Sound Architecture (ALSA)</a>, which forms part of the kernel.  In most cases sound will work out of the box, though it may need some minor adjustment. Click on the speaker icon to mute all audio, then again to restore. Place cursor over speaker icon in the Notification Area and use scroll wheel to adjust volume.</p> 
+
+<div class="blue"><h2>Sound Card Set-up</h2></div>
+<p> The <a href="http://www.mepis.org/docs/en/index.php?title=Detect_sound_card">sound card</a> is configured and volume of selected tracks adjusted by RC the speaker icon in the Notification Area > Open Mixer. If you have more than one sound card, be sure to select the one you want to adjust using the pull-down menu at the top of the Mixer. </p>
+<p>Note that by default Left and Right outputs are linked to keep them balanced, but you can unlink them by clicking on the chain icon below any pair of channel sliders; click again to relink. Below each slider pair, click on the small speaker icon will mute that channel. The center button of a three-button mouse can be configured for direct access to the Audio Mixer by RC the speaker icon > Preferences.</p>
+<ul><li><b>System volume</b>. A default volume is set during boot of the LiveUSB or installation, but it may not be optimal for a given system. To change it, click and hold the sliders in the channel "Master" and move them to the level you wish. Then do the same for the channel "PCM;" if you do not see this channel, click on the "Select Controls" button in the lower left corner and add it. 
+To see the Master Volume without opening the Mixer, place the cursor over the Speaker icon. </li>
+<li><b>System beep</b> when logging out or booting. Adjust as desired. To turn off completely, it may help to move the sliders all the way up, then all the way down. Change takes effect after logging out/in. Note that the BIOS may have a beep switch as well, note also that not all mixers have the Beep Control.</li>
+<li><b>Other</b>. Follow the same procedure using the channel (e.g., Headphone) you want to adjust. If your sound setup requires channels that are not visible, use the Select Controls button to add them.</li>
+</ul>
+
+<div class="blue"><h2>Troubleshooting</h2></div>
+<ul>
+<li><b>No sound</b>. If you have a speaker icon in the Notification Area but have no sound, try one of these solutions:
+<ul><li>Try raising all controls to a higher level.</li><li>Click on the Select Controls button to add other channels that you might need, then raise the volume on those.</li>
+<li>If  you have recently installed PulseAudio (see below), open the ALSA mixer ("Audio Mixer") and make sure the speakers are not muted.</li></ul></li>
+<li><b>System</b>. When using a LiveUSB or booting to an installed MX Linux, you should see a speaker icon in the Notification Area. If no icon is visible, it could be that the sound card is missing or unrecognized, but the most common problem is that of multiple soundcards, which we address here.</li>
+<ul><li>Open a terminal as regular user and enter <code><b>cat /proc/asound/cards</b></code></li>
+<li>The output will show available soundcards (audio, webcam, etc.), each starting with a number. Note the number of the card you want to use as the default.</li>
+<li>RC <a href="asoundrc">this link</a> > Save link as, then  navigate to your home folder and paste it in with the name <code><b>.asoundrc</b></code>. Don't forget the leading dot that makes it a hidden file.</li>
+<li>Open that file, replace (if necessary) "card 1" that occurs <u>twice</u> with the actual number you want to use (e.g., "card 0"), then save and exit the file</li>
+<li>Log out and back in, and you should now see the speaker icon in the Notification Area. You should also now have sound; if not, repeat the directions, changing the card number.</li>
+<li>Note that if you install PulseAudio (below), the sound card selection can be made in its dedicated mixer <b>pavucontrol</b>.</li>
+</ul>
+<li><b>Particular applications</b>. Some applications have sound setups that require special steps in MX-14.</li>
+<ul><li>Skype. From version 4.3x onward, Skype only supports pulseaudio (see below). This results in no sound card being chosen on a system that uses ALSA alone, so that the only item in the Skype > Options > Sound Devices pull-down menus is "Default," which does not work. The only solution is to install PulseAudio (below), which is designed to work with ALSA; see <a href="http://www.mepiscommunity.org/node/141"><b>the MX video</b></a> on how to set this up. Note: according to the <a href="https://wiki.debian.org/PulseAudio#Dynamically_enable.2Fdisable" >Debian Wiki</a>, it is possible to switch PulseAudio on/off as needed.</li>
+</ul>
+</ul>
+
+
+
+<div class="blue"><h2>Sound servers</h2></div>
+<p> Whereas the Sound Card is a hardware item accessible to the user, the Sound Server is software that works largely in the background. It permits general management of sound cards, and provides the ability carry out advanced operations on the sound.</p> 
+<ul><li><b>PulseAudio.</b> <a href="http://www.freedesktop.org/wiki/Software/PulseAudio/">PulseAudio</a> is an advanced open-source sound server that can work with several operating systems. It has its own mixer, called  <b>pavucontrol</b>, that is installed along with it in MX Linux. It allows the user to control the volume and destination of the sound signal. NOTE: because PulseAudio closely integrates with other parts of the software, it is best installed through Synaptic.</li>
+
+
+<li><b>Jack. </b>  <a href="http://jackaudio.org/"> JACK Audio Connection Kit</a> is a <i>professional</i> sound system for connecting audio applications and hardware output. It is not useful for normal desktop use.</li></ul>
+
+<div class="blue"><h2>Help</h2></div>
+
+<ul><li><a href="http://www.mepis.org/docs/en/index.php?title=Sound_not_working" >MEPIS Wiki: Sound not working</a></li>
+<li><a href="http://www.alsa-project.org/main/index.php/Matrix:Main" >ALSA: SoundCard Matrix</a></li>
+<li><a href="http://www.alsa-project.org/main/index.php/Asoundrc" >ALSA: Asoundrc</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/ALSA">ArchLinux Wiki: ALSA Information</a></li>
+<li><a href="https://wiki.debian.org/PulseAudio/" >PulseAudio: Debian wiki</a></li>
+
+<li><a href="http://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/">PulseAudio Documentation: Free desktop</a></li> 
+</ul>
+
+
+
+<div class="footer"></div>
+
+<li>Version: 0.8
+Last updated 2014-10-30</li>
+</body>
+</html>
+
+</div>

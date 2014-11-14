@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14 Remaster</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Remaster</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+
+<div id="body-text">
+
+<div class="sect1">
+<div class="blue"><h2>Introduction</h2></div>
+
+<div class="sectionbody">
+
+<div class="paragraph"><p>The primary purpose of live remastering is to make it as safe, easy, and
+convenient as possible for users to make their own customized version of
+MX-14. The idea is that you use a LiveUSB or a LiveHD (a <q>frugal</q> install to a
+hard drive partition) as the development and testing environment.  Add or
+subtract packages and then when you are ready to remaster, use use a simple
+remaster script or GUI to do the remaster and then reboot.  If something goes
+horribly wrong, simply reboot again with the <span class="cheat">rollback</span> option and you
+will boot into the previous environment.</p></div>
+<div class="blue"><h2>Live Remastering</h2></div>
+<div class="paragraph"><p>If you are using a LiveUSB then the LiveUSB is your target system.  You can use it to install your customized version of MX-14 on other systems.
+If you are using a LiveHD then you will need to create a LiveUSB or
+a LiveCD from the LiveHD in order to install elsewhere.</p></div>
+<div class="sect2">
+
+<h3>System Requirements</h3>
+
+<div class="paragraph"><p>There are three simple and straightforward system requirements that
+are needed to perform live remastering:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The boot device must be writable
+</p>
+</li>
+<li>
+<p>
+The boot device must have enough free space to create a new linuxfs file
+</p>
+</li>
+<li>
+<p>
+The development system must have been created using a "frugal install",
+not a fromiso install
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>In other words, the development system must be booted using a linuxfs file
+that is on a writable device that has enough free space to create a new
+linuxfs file.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+
+
+
+<div class="sect2">
+<h3 id="_remastering_plus_persistence">Remastering plus Persistence</h3>
+
+<div class="paragraph"><p>A persistent home or a persistent root can be useful if you are doing remastering.
+A persistent home is a handy place to hold your development environment if
+you don&#8217;t want that environment to end up in your remaster.  A persistent
+root is a handy way to save changes between reboots without having to go
+to the bother of doing a full remaster.  Details, see <a href="persistence.html">Persistence</a>.   </p></div>
+</div>
+
+<div class="blue"><h2 id="steps">Step by step</h2></div>
+<p>You typically will be in a Live session when you remaster. After you have made all the changes you want, click Start menu > System > RemasterCC and enter the root password.  A dialog box opens with 4 buttons,</p><ul><li><b>Set up live persistence</b>. If you made your bootable usb with unetbootin or similar tool, you can use this option to create a new persistence file which will let the user save changes made to the file system for future boots. This option isn't strictly needed if you just want to make a remaster, but its nice for saving changes between remasters.</li><li><b>Configure live persistence</b>. This will set how the liveUSB will save the persistence file. Although there is an automatic option, is does not currently work. The semi-automatic option is the default, whereby changes will be saved at logout. There is also a manual save option. Again, this is not strictly speaking required for the remaster to work.</li><li><b>Save root persistence</b>. This is how you save your filesystem changes to the persistence file in the event you elected a manual save option. This will also work if you just want to save changes immediately rather than waiting for logout in semi-automatic mode.</li><li><b>Remaster</b>. The remaster system will walk you through rolling up your filesystem changes, either made during the session or from your persistence files if available, into a new linuxfs file on the liveUSB. Your changes will now be part of the default linuxfs filesytem and will appear even if you do not choose the persistence options at boot.</li></ul><p>Work your way carefully through the list, from top to bottom, following the directions that lead you through the process.</p>
+
+<div class="sect1">
+<div class="blue"><h2 id="boot-options">Live Remaster Boot Options</h2></div>
+<div class="sectionbody">
+<div class="paragraph"><p>There are only two live remaster boot option because live remastering is
+almost entirely handled by a script or GUI.  The only two options are to
+prevent live remastering and to rollback live remastering in case something
+goes horribly wrong.</p></div>
+
+<table>
+<tr class="blue">
+	<td><b>Option</b></td> 
+	<td><b>Description</b></td> 
+</tr>
+<tr>
+	<td><i>noremaster</i></td> 
+	<td>don&#8217;t remaster even when a linuxfs.new file is found</td> 
+</tr>
+<tr>
+	<td><i>rollback</i></td>
+	<td>return to previous version after a failed remaster</td>
+</tr>
+</table>
+
+<br />
+<p>For details, see <a href="advanced_remaster.html">Advanced: Remaster</a> </p>
+<br />
+
+</div>
+<div class="footer">MX-14 Version: 0.1, modified from antiX version 0.1.1<br />
+Last updated 2014-1-15
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+   <head>
+        <title>MX-14: Network</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Network</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>MX-14 can handle most network functions by default, and options are available through the installation of other applications from the repos. </p>
+
+<div class="blue"><h2>Internet access</h2></div>
+<p>Internet connections are handled by Network Manager; click applet in the Notification Area to see status, connect and explore options. RC the applet > Edit Connections will open up a settings box with five tabs.</p>
+<ul><li><b>Wired</b>. In most situations this requires no attention; highlight and click the Edit button for special setups.</li>
+<li><b>Wireless</b></li><ul><li>Network Manager will usually automatically detect your network card and use it to find available access points. </li><li>In some situations, the powerful command-line tool <i>Ceni</i> in the repos may be helpful.</li></ul>
+<li><b>Mobile Broadband</b>. This tab allows you to use a 3G/4G mobile device for access to the web. Click the Add button to set up.</li>
+<li><b>VPN</b>. Click the Add button to set up.</li>
+<li><b>DSL</b>. Click the Add button to set up.</li>
+</ul></ul>
+<p><b>Help</b>.</p>
+<ul><li>For a general discussion of internet access in Debian Stable, consult the <a href="http://www.mepiscommunity.org/user_manual11/index.html#section05-6-0" >Mepis Users Manual</a>.
+<li>Details about wireless drivers and firmware can be found in the <a href="https://wiki.archlinux.org/index.php/Wireless_Setup#Troubleshooting_drivers_and_firmware">Arch Wiki</a> and the official documentation at the <a href="http://wireless.kernel.org/">Linux Wireless</a> website.</li>
+<li>Helpful directions can be found in the <a href="https://help.ubuntu.com/community/NetworkManager#VPN_support">Ubuntu Wiki: Network Manager</a></li>
+</ul>
+
+<div class="blue"><h2>FTP</h2></div>
+<p>See <a href="files.html#ftp" >Thunar</a></p>
+<div class="blue"><h2>File sharing</h2></div>
+
+<p>There are various possibilities to share files between computers or between a computer and a device</p>
+<ul>
+<li><a href="samba.html"><b>Samba</b></a>.  SAMBA is the most complete solution to share files with Windows machines on your network without making changes to the windows machines.  SAMBA can also be used by many network media players and Network-attached storage (NAS)] devices.   SAMBA offers some other services for interfacing with Windows networks, such as domain authentication, messaging services, and netbios name resolution.</li>
+<li><a href="http://www.mepis.org/docs/en/index.php?title=NFS#MX-14"><b>NFS</b></a>. This is the standard Unix protocol for sharing files.  Many feel it is better than Samba for sharing files, and it can be used with Windows (2000 & XP) machines if you install "Services for Unix" or a third-party NFS client on them.</li>
+<li><b>Bluetooth</b>: For file exchange, install <i>blueman</i> from the repos, reboot, pair with the device, the RC the bluetooth icon in the Notification Area > Send Files to Device.</li>
+<li><b>Android</b>. There are two options for sharing files with an Android device.
+<ul><li>Many phones running Android 4.xx include <a href="https://en.wikipedia.org/wiki/Media_Transfer_Protocol">mtp</a> capability, and can use the following procedure.</li>
+<ul><li>Install <b>go-mtpfs</b> (in the Community xfce-4.10 repo, enabled by default for MX-14).</li>
+<li>Connect phone.</li>
+<li>Open a terminal and type <b><code>go-mtpfs /media/MyAndroid</code></b></li>
+<li>Open Thunar, click on MyAndroid folder in the left pane.</li>
+<li>Click on the Card folder to see the data files.</li>
+<li>When done, go back to the terminal, and issue command <b><code>fusermount -u /media/MyAndroid</code></b></li></ul>
+<li>Phones lacking mtp capability can be accessed by installing an app from Google's Play Store such as AirDroid that will allow you to use an ordinary browser.</li></ul></li></ul>
+
+<div class="blue"><h2>Network printing</h2></div>
+<p>For the setup of network printing, consult <a href="samba.html" >this document</a>.</p>
+
+<div class="blue"><h2>Help</h2></div>
+<p><a href="https://www.linuxquestions.org/linux/answers/Networking" >LinuxQuestions Networking Tutorials</a></p>
+<div class="footer">Version: 0.5<br />
+Last updated 2014-10-30</div>
+</body>
+</html>
+
+</div>
