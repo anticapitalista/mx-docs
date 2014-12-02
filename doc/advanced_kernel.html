@@ -1,0 +1,64 @@
+<html>
+   <head>
+        <title>MX-14: Advanced: The Linux Kernel</title>
+        <link href="custom.css" rel="stylesheet" type="text/css">
+   </head>
+<body>
+<h1>MX-14: Advanced: The Linux Kernel</h1> 
+
+<a href="http://www.mepiscommunity.org/mx14"><img src="mxfcelogo.png" width="80" height="74" alt="MX-14" style="margin-left:45%;" /></a>
+
+
+<div style="margin-bottom:1em;"><img src="mouse.png" width="50" height="40" />Note: RC=right click</div>
+
+<div style="text-align: center"><div style="margin-bottom:1em;"><a href="index.html">QuickStart</a> | <a href="customization.html">Customization</a> | <a href="files.html">Files</a> | <a href="localization.html" >Localization </a> | <a href="mxapps.html" >MX Apps</a> | <a href="network.html" >Network</a> | <a href="persistence.html" >Persistence</a> | <a href="remaster.html" >Remaster</a> | <a href="samba.html" >Samba</a> | <a href="smxi.html" >smxi</a> | <a href="sound.html" >Sound</a> | <a href="synaptic.html" >Synaptic</a> | <a href="advanced.html" >Advanced</a> | <a href="about.html">About</a> </div></div>
+
+<div class="blue"><h2>Introduction</h2></div>
+<p>To provide a background, here is a simplified diagram and description of the kernel's position in a Linux OS, borrowed from <i>Anatomy of the Linux kernel</i>.</p>
+<div style="text-align: center"><img src="kernel.jpg" border="1" width="370" height="250" alt="Linux kernel"></div>
+<p>At the top is the <a href="http://en.wikipedia.org/wiki/User_space">user space</a>, or application space. This is where the user applications are executed. Below the user space is the kernel space. Here, the Linux kernel exists.
+
+There is also the GNU C Library (glibc). This provides the system call interface that connects to the kernel and provides the mechanism to transition between the user-space application and the kernel. This is important because the kernel and user application occupy different protected address spaces. And while each user-space process occupies its own virtual address space, the kernel occupies a single address space. </p>
+<div class="blue"><h2>Upgrading</h2></div>
+
+<p>Unlike other software on your system, the kernel is not upgraded automatically except below the minor revision level (indicated by the third number in the kernel name). Here is a basic approach for manually upgrading the Linux kernel on your system.</p>
+
+<ul><li>Ask yourself some questions: Why do I want to upgrade the kernel? Is there a driver I need for new hardware, for instance? Am I aware that I might have problems of one kind or another?
+<li>First, find out what you currently have installed. Open a terminal and enter: <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>inxi -S</code><br />
+For instance, a user of the default MX 14.3 pae would see something like this:<br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>$ inxi -S<br />
+&nbsp;&nbsp;&nbsp;System:    Host: mx-custom Kernel: <b>3.16-0.bpo.3-686-pae i686 (32 bit)</b><br />
+     &nbsp;&nbsp;   &nbsp;  &nbsp; &nbsp;&nbsp;&nbsp;Desktop: Xfce 4.10.3 Distro: MX-14.3 Symbiosis 
+</code></li>
+Be sure to write down the name of the kernel (bolded above) from the output of that command.
+<li>Second, select and install a new kernel. Open Synaptic, search on "linux-image" and look for a higher kernel number that matches the architecture (e.g., 686) and processor (e.g., pae) that you already have, unless you have a good reason to change. A default MX 14.3 pae user would see at least this possibility:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>linux-image-3.16-0.bpo.2-686-pae</code><br />
+Note that the new kernel <b>must match</b> the host computer's architecture and processor. Install the one you want or need in the usual manner.
+<li>Third, install the linux-headers package that match the new kernel you selected. There are two methods of doing this. 
+<ul><li>Look carefully at the Synaptic entries beginning "linux-headers" and match the kernel. For instance, if you selected linux-image-3.16-0.bpo.2-686-pae, then you would install <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>linux-headers-3.16-0.bpo.2-686-pae </code> 
+<li>Alternatively, you can install the headers more easily after rebooting into the new kernel by typing the following code in a root terminal: <br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>apt-get install linux-headers-$(uname -r)</code></li></ul>
+Headers will also be installed if you use a command such as <a href="https://wiki.debian.org/ModuleAssistant">m-a prepare</a>.
+<li>When you reboot, you will automatically boot into the highest available kernel. If it doesn't work, you have the option to return to what you were using:  reboot, and when you see the GRUB screen highlight <b>Advanced Options for</b> whatever partition you want to boot into, then select the kernel and press enter.</li></ul>
+<div class="blue"><h2>Advanced procedures</h2></div>
+Other considerations and choices exist with respect to kernels: 
+<ul><li>Other pre-rolled kernels exist such as <a href="http://liquorix.net/">the Liquorix kernel</a>, which is a version of the Zen kernel and is intended to provide a better desktop use experience in terms of responsiveness, even under heavy loads such as during gaming, plus low latency (important for audio work). That is most easily installed for MX 14.x through Synaptic: enable the Community Repository testing repos (<a href="synaptic.html#repos">Synaptic</a>) to see and select it. </li> 
+<li>Distros (such as antiX) often roll their own.</li>
+<li>Knowledgeable individuals may compile a specific kernel for a particular reason.</ul> 
+
+
+<div class="blue"><h2>Links</h2></div>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Linux_kernel"> Wikipedia: Linux kernel</a>
+<li><a href="http://www.ibm.com/developerworks/library/l-linux-kernel/">Anatomy of the Linux kernel</a>  </li>
+<li><a href="http://www.kernel.org/" > Linux kernel archives</a>
+<li><a href="http://www.makelinux.net/kernel_map" > Interactive map of Linux kernel</a>
+</ul> 
+
+<div class="footer">Version: 0.3<br />
+Last updated 2014-11-26</div>
+</body>
+</html>
+ 
